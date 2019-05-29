@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sherwood_Market {
+namespace AemonsNook {
 #if WINDOWS || LINUX
     /// <summary>
     /// The main class.

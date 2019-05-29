@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sherwood Market", "Sherwood Market\Sherwood Market.csproj", "{47BBA3A7-F72D-4040-92B5-16C7B781B273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AemonsNook", "AemonsNook\AemonsNook.csproj", "{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47BBA3A7-F72D-4040-92B5-16C7B781B273}.Debug|x86.ActiveCfg = Debug|x86
-		{47BBA3A7-F72D-4040-92B5-16C7B781B273}.Debug|x86.Build.0 = Debug|x86
-		{47BBA3A7-F72D-4040-92B5-16C7B781B273}.Release|x86.ActiveCfg = Release|x86
-		{47BBA3A7-F72D-4040-92B5-16C7B781B273}.Release|x86.Build.0 = Release|x86
+		{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}.Debug|x86.ActiveCfg = Debug|x86
+		{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}.Debug|x86.Build.0 = Debug|x86
+		{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}.Release|x86.ActiveCfg = Release|x86
+		{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {18E47DA4-16BE-4ABF-93A9-46CCDA4ABE38}
+		SolutionGuid = {BFF8ABC4-B051-488B-9BD5-71447EF34589}
 	EndGlobalSection
 EndGlobal

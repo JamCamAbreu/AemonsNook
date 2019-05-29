@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{47BBA3A7-F72D-4040-92B5-16C7B781B273}</ProjectGuid>
+    <ProjectGuid>{B7517C80-2DD6-4D90-86A1-9B9EBA7631FA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sherwood_Market</RootNamespace>
-    <AssemblyName>Sherwood Market</AssemblyName>
+    <RootNamespace>AemonsNook</RootNamespace>
+    <AssemblyName>AemonsNook</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

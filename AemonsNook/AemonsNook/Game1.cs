@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Sherwood_Market {
+namespace AemonsNook {
   /// <summary>
   /// This is the main type for your game.
   /// </summary>

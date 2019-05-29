@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sherwood Market")]
-[assembly: AssemblyProduct("Sherwood Market")]
+[assembly: AssemblyTitle("AemonsNook")]
+[assembly: AssemblyProduct("AemonsNook")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cbadaef8-b96a-412d-b39b-6cf9b3ab6940")]
+[assembly: Guid("dae1d8b7-84d2-4af0-9e2e-814a70765aa7")]
 
 // Version information for an assembly consists of the following four values:
 //
