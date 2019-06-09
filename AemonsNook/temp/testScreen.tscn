@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Temp/helloButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Temp/SimpleTitle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Temp/SimpleText.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Temp/SimpleText.gd" type="Script" id=4]
+[ext_resource path="res://UI/s_mouse.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/n2_tile.tscn" type="PackedScene" id=6]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="button1" parent="." instance=ExtResource( 1 )]
+margin_left = 37.0618
+margin_top = 116.484
+margin_right = 165.062
+margin_bottom = 180.484
+
+[node name="button2" parent="." instance=ExtResource( 1 )]
+margin_left = 280.807
+margin_top = 119.747
+margin_right = 408.807
+margin_bottom = 183.747
+
+[node name="Panel3" parent="." instance=ExtResource( 2 )]
+margin_left = 26.6114
+margin_right = 404.611
+
+[node name="TimeLabel" parent="Panel3" instance=ExtResource( 3 )]
+margin_left = 241.987
+margin_top = 11.5924
+margin_right = 300.987
+margin_bottom = 40.5924
+text = "Time:"
+
+[node name="Time" parent="Panel3" instance=ExtResource( 3 )]
+margin_left = 303.499
+margin_top = 12.0126
+margin_right = 341.499
+margin_bottom = 41.0126
+text = "0"
+script = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="Panel3/Time"]
+autostart = true
+
+[node name="n2_mouse" parent="." instance=ExtResource( 5 )]
+position = Vector2( -7.33612, 24.7394 )
+
+[node name="n2_tile" parent="." instance=ExtResource( 6 )]
+position = Vector2( 104.461, 254.575 )
+
+[node name="n2_tile2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 164.083, 252.311 )
+
+[node name="n2_tile3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 142.574, 308.159 )
+
+[node name="n2_tile4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 205.592, 290.424 )
+
+[node name="n2_tile5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 228.611, 245.518 )
+[connection signal="timeout" from="Panel3/Time/Timer" to="Panel3/Time" method="_on_Timer_timeout"]
