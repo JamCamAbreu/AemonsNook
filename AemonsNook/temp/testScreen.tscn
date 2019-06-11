@@ -44,7 +44,7 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="n2_mouse" parent="." instance=ExtResource( 5 )]
-position = Vector2( -7.33612, 24.7394 )
+position = Vector2( -202.894, 354.896 )
 
 [node name="n2_tile" parent="." instance=ExtResource( 6 )]
 position = Vector2( 104.461, 254.575 )

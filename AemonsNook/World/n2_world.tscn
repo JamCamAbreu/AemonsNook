@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://World/n2_tiles.gd" type="Script" id=1]
+
+[node name="n2_world" type="Node2D"]
+
+[node name="n2_tiles" type="Node2D" parent="."]
+script = ExtResource( 1 )
