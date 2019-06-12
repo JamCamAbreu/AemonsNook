@@ -13,7 +13,8 @@ func setTexture(type):
 		tileType.tree:
 			get_node("sprite").set_animation("tree")
 
-func _ready():
-	randomize()
-	var ran = randi() % 3
-	setTexture(ran)
+#
+#func _ready():
+#	randomize()
+#	var ran = randi() % 3
+#	setTexture(ran)
