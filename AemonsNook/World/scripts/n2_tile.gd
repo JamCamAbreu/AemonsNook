@@ -4,7 +4,7 @@ enum tileType { grass, water, tree}
 
 var type = tileType.grass
 
-func setTexture(type):
+func _setTexture(type):
 	match (type):
 		tileType.grass:
 			get_node("sprite").set_animation("grass")
@@ -13,8 +13,6 @@ func setTexture(type):
 		tileType.tree:
 			get_node("sprite").set_animation("tree")
 
-#
-#func _ready():
-#	randomize()
-#	var ran = randi() % 3
-#	setTexture(ran)
+func setType(_type):
+	type = _type
+	_setTexture(_type)
