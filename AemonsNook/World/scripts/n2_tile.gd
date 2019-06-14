@@ -1,17 +1,19 @@
 extends Node2D
 
-enum tileType { grass, water, tree}
+enum TILETYPE { GRASS, WATER, TREE, DIRT}
 
-var type = tileType.grass
+var type = TILETYPE.GRASS
 
 func _setTexture(type):
 	match (type):
-		tileType.grass:
+		TILETYPE.GRASS:
 			get_node("sprite").set_animation("grass")
-		tileType.water:
+		TILETYPE.WATER:
 			get_node("sprite").set_animation("water")
-		tileType.tree:
+		TILETYPE.TREE:
 			get_node("sprite").set_animation("tree")
+		TILETYPE.DIRT:
+			get_node("sprite").set_animation("dirt")
 
 func setType(_type):
 	type = _type

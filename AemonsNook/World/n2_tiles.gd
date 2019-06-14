@@ -1,11 +1,13 @@
 extends Node2D
 
 # get enum from tile:
-const tileScript = preload("res://World/scripts/n2_tile.gd")
+const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 
-var WIDE = 40
-var TALL = 20
+var WIDE = 80
+var TALL = 60
 var tiles = []
+
+enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 
 onready var t = get_node("tileTimer")
 
@@ -16,13 +18,20 @@ func _wait(seconds):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_generateTiles(tileScript.tileType.tree)
+	_generateTiles(TILE_SCRIPT.TILETYPE.TREE)
 	_wait(1)
 	yield(t, "timeout")
-	_seed(tileScript.tileType.grass, 20)
+	_seedCenter(TILE_SCRIPT.TILETYPE.GRASS, 20)
 	_wait(1)
 	yield(t, "timeout")
-	_growType(tileScript.tileType.grass, 7)
+	_growType(TILE_SCRIPT.TILETYPE.GRASS, 7)
+	_wait(1)
+	yield(t, "timeout")
+	_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20)
+	_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20)
+	_wait(1)
+	yield(t, "timeout")
+	_growType(TILE_SCRIPT.TILETYPE.GRASS, 3)
 
 
 func _generateTiles(type):
@@ -39,8 +48,7 @@ func _generateTiles(type):
 			add_child(newTile)
 			tiles[r][c] = newTile
 
-
-func _seed(type, amount):
+func _seedCenter(type, amount):
 	randomize()
 	var centerX = WIDE/2
 	var centerY = TALL/2
@@ -51,6 +59,20 @@ func _seed(type, amount):
 		var ranY = centerY + ((randi() % reachY) - reachY/2)
 		tiles[ranY][ranX].setType(type)
 
+func _seedSide(type, side, amount):
+	match (side):
+		MAPSIDE.TOP:
+			var maxVariance = int(TALL/10)
+			for a in amount:
+				var variance = randi() % maxVariance
+				var posX = (WIDE/amount)*a
+				tiles[0 + variance][posX].setType(type)
+		MAPSIDE.RIGHT:
+			var thing = 2
+		MAPSIDE.BOTTOM:
+			var thing = 2
+		MAPSIDE.LEFT:
+			var thing = 2
 
 func _growType(type, passes):
 	
@@ -105,3 +127,5 @@ func scanAndGrow(type, x, y, rollMax, rollMaxInner):
 			checkTile = tiles[y + 1][x]
 			if ((randi() % rollMaxInner) == 0):
 				checkTile.setType(type)
+
+
