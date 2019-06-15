@@ -8,3 +8,5 @@
 script = ExtResource( 1 )
 
 [node name="tileTimer" type="Timer" parent="n2_tiles"]
+
+[node name="tileTimerInner" type="Timer" parent="n2_tiles"]

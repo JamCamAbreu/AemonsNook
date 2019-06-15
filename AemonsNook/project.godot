@@ -19,6 +19,10 @@ config/name="AemonsNook"
 run/main_scene="res://World/n2_world.tscn"
 config/icon="res://Config/icon.png"
 
+[display]
+
+window/size/height=768
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

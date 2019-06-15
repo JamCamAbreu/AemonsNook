@@ -3,6 +3,7 @@ extends Node2D
 enum TILETYPE { GRASS, WATER, TREE, DIRT}
 
 var type = TILETYPE.GRASS
+var seedID = "none"
 
 func _setTexture(type):
 	match (type):
