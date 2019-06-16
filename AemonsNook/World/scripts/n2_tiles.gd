@@ -3,8 +3,9 @@ extends Node2D
 # get enum from tile:
 const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 
-var WIDE = 80
-var TALL = 60
+const WIDE = 40
+const TALL = 30
+const TILE_SIZE_PIXELS = 16
 var tiles = []
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
@@ -19,28 +20,27 @@ func _wait(seconds):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_generateTiles(TILE_SCRIPT.TILETYPE.TREE)
+	_generateTiles(TILE_SCRIPT.TILETYPE.GRASS)
 	
-	_seedCenter(TILE_SCRIPT.TILETYPE.GRASS, 40, "first")
-	_growType(TILE_SCRIPT.TILETYPE.GRASS, 12, "first", 0.5)
-	_wait(2)
-	yield(tt, "timeout")
+	#_seedCenter(TILE_SCRIPT.TILETYPE.GRASS, 40, "first")
+	#_growType(TILE_SCRIPT.TILETYPE.GRASS, 12, "first", 0.5)
+	#_wait(2)
+	#yield(tt, "timeout")
 	
-	_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
-	_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
-	_growType(TILE_SCRIPT.TILETYPE.GRASS, 5, "side", 0.5)
-	_wait(2)
-	yield(tt, "timeout")
+	#_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
+	#_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
+	#_growType(TILE_SCRIPT.TILETYPE.GRASS, 5, "side", 0.5)
+	#_wait(2)
+	#yield(tt, "timeout")
 	
 	_seedSide(TILE_SCRIPT.TILETYPE.WATER, MAPSIDE.RIGHT, 30, "pond1")
 	_growType(TILE_SCRIPT.TILETYPE.WATER, 10, "pond1", 0.5)
-	_wait(2)
-	yield(tt, "timeout")
 	
-	_seedRandom(TILE_SCRIPT.TILETYPE.DIRT, 3, "dirt1")
-	_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
-	_wait(2)
-	yield(tt, "timeout")
+	#_seedRandom(TILE_SCRIPT.TILETYPE.DIRT, 3, "dirt1")
+	#_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
+	#_wait(2)
+	#yield(tt, "timeout")
+
 	
 func _generateTiles(type):
 	var t = load("res://World/sc_tile.tscn")
@@ -52,9 +52,14 @@ func _generateTiles(type):
 		for c in range(cols):
 			var newTile = t.instance()
 			newTile.setType(type)
-			newTile.translate(Vector2(c * 16, r * 16))
+			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
+			createClickablePos(c, r, TILE_SCRIPT.CLICKABLETYPE.TREE)
+
+func createClickablePos(x, y, type):
+	var curTile = tiles[y][x]
+	curTile.createClickable(type)
 
 
 
