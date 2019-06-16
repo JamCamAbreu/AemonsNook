@@ -19,3 +19,5 @@ func _setTexture(type):
 func setType(_type):
 	type = _type
 	_setTexture(_type)
+	
+	

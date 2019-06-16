@@ -43,7 +43,7 @@ func _ready():
 	yield(tt, "timeout")
 	
 func _generateTiles(type):
-	var t = load("res://World/n2_tile.tscn")
+	var t = load("res://World/sc_tile.tscn")
 	var rows = TALL
 	var cols = WIDE
 	for r in range(rows):
