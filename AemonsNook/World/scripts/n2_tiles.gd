@@ -40,7 +40,14 @@ func _ready():
 	#_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
 	#_wait(2)
 	#yield(tt, "timeout")
+	createClickableRandom(TILE_SCRIPT.CLICKABLETYPE.TREE, 100)
 
+func createClickableRandom(type, amount):
+	for a in amount:
+		var ranX = randi() % WIDE
+		var ranY = randi() % TALL
+		createClickablePos(ranX, ranY, type)
+	
 	
 func _generateTiles(type):
 	var t = load("res://World/sc_tile.tscn")
@@ -55,11 +62,17 @@ func _generateTiles(type):
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
-			createClickablePos(c, r, TILE_SCRIPT.CLICKABLETYPE.TREE)
+			
 
 func createClickablePos(x, y, type):
 	var curTile = tiles[y][x]
-	curTile.createClickable(type)
+	var thing2 = TILE_SCRIPT.TILETYPE.WATER
+	if (curTile.type != TILE_SCRIPT.TILETYPE.WATER):
+		curTile.createClickable(type)
+	else:
+		var thing = 2
+
+		var thing3
 
 
 

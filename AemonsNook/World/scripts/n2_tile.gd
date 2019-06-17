@@ -28,14 +28,15 @@ func setType(_type):
 	_setTexture(_type)
 	
 func createClickable(type):
-	match (type):
-		CLICKABLETYPE.TREE:
-			var t = load("res://Clickable/click-resources/sc_clickable.tscn")
-			var newClickable = t.instance()
-			add_child(newClickable)
-			newClickable.connect("clicked", self, "clickable_clicked_received")
-			clickable = newClickable
-			hasClickable = true
+	if (hasClickable == false):
+		match (type):
+			CLICKABLETYPE.TREE:
+				var t = load("res://Clickable/click-resources/sc_clickable.tscn")
+				var newClickable = t.instance()
+				add_child(newClickable)
+				newClickable.connect("clicked", self, "clickable_clicked_received")
+				clickable = newClickable
+				hasClickable = true
 			
 func destroyClickable():
 	if (hasClickable):
