@@ -1,7 +1,7 @@
 extends Node2D
+const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 enum TILETYPE { GRASS, WATER, TREE, DIRT}
-enum CLICKABLETYPE { TREE, STONE }
 
 var type = TILETYPE.GRASS
 var seedID = "none"
@@ -29,14 +29,13 @@ func setType(_type):
 	
 func createClickable(type):
 	if (hasClickable == false):
-		match (type):
-			CLICKABLETYPE.TREE:
-				var t = load("res://Clickable/click-resources/sc_clickable.tscn")
-				var newClickable = t.instance()
-				add_child(newClickable)
-				newClickable.connect("clicked", self, "clickable_clicked_received")
-				clickable = newClickable
-				hasClickable = true
+		var t = load("res://Clickable/click-resources/sc_clickable.tscn")
+		var newClickable = t.instance()
+		newClickable._setType(type)
+		add_child(newClickable)
+		newClickable.connect("clicked", self, "clickable_clicked_received")
+		clickable = newClickable
+		hasClickable = true
 
 
 func destroyClickable():
