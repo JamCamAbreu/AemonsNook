@@ -20,8 +20,7 @@ func _ready():
 			newTile.translate(Vector2(c + 1, r + 1))
 			add_child(newTile)
 			tiles[r][c] = newTile
-			
-	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

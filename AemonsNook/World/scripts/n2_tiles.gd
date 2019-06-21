@@ -3,8 +3,8 @@ extends Node2D
 # get enum from tile:
 const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 
-const WIDE = 40
-const TALL = 30
+const WIDE = 80
+const TALL = 50
 const TILE_SIZE_PIXELS = 16
 var tiles = []
 
@@ -22,19 +22,19 @@ func _wait(seconds):
 func _ready():
 	_generateTiles(TILE_SCRIPT.TILETYPE.GRASS)
 	
-	#_seedCenter(TILE_SCRIPT.TILETYPE.GRASS, 40, "first")
-	#_growType(TILE_SCRIPT.TILETYPE.GRASS, 12, "first", 0.5)
+	#_seedCenter(TILE_SCRIPT.TILETYPE.TREE, 20, "first")
+	#_growType(TILE_SCRIPT.TILETYPE.TREE, 4, "first", 0.5)
 	#_wait(2)
 	#yield(tt, "timeout")
 	
-	#_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
-	#_seedSide(TILE_SCRIPT.TILETYPE.GRASS, MAPSIDE.TOP, 20, "side")
-	#_growType(TILE_SCRIPT.TILETYPE.GRASS, 5, "side", 0.5)
+	#_seedSide(TILE_SCRIPT.TILETYPE.TREE, MAPSIDE.TOP, 20, "side")
+	#_seedSide(TILE_SCRIPT.TILETYPE.TREE, MAPSIDE.TOP, 20, "side")
+	#_growType(TILE_SCRIPT.TILETYPE.TREE, 3, "side", 0.5)
 	#_wait(2)
 	#yield(tt, "timeout")
 	
-	_seedSide(TILE_SCRIPT.TILETYPE.WATER, MAPSIDE.RIGHT, 30, "pond1")
-	_growType(TILE_SCRIPT.TILETYPE.WATER, 10, "pond1", 0.5)
+	_seedSide(TILE_SCRIPT.TILETYPE.WATER, MAPSIDE.RIGHT, 30, "river1")
+	_growType(TILE_SCRIPT.TILETYPE.WATER, 10, "river1", 0.5)
 	
 	#_seedRandom(TILE_SCRIPT.TILETYPE.DIRT, 3, "dirt1")
 	#_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
@@ -62,17 +62,14 @@ func _generateTiles(type):
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
-			
+
+
 
 func createClickablePos(x, y, type):
 	var curTile = tiles[y][x]
 	var thing2 = TILE_SCRIPT.TILETYPE.WATER
 	if (curTile.type != TILE_SCRIPT.TILETYPE.WATER):
 		curTile.createClickable(type)
-	else:
-		var thing = 2
-
-		var thing3
 
 
 
@@ -146,6 +143,9 @@ func _growType(type, passes, seedID, growSpeed):
 		for x in range(WIDE - 1, 0, -1):
 			for y in TALL:
 				scanAndGrow(type, x, y, 3, 3, seedID)
+				
+		#_wait(.1)
+		#yield(tt, "timeout")
 
 func checkSeedID(tileSeed, _seedID):
 	if (_seedID == "all" or tileSeed == _seedID):

@@ -37,8 +37,11 @@ func createClickable(type):
 				newClickable.connect("clicked", self, "clickable_clicked_received")
 				clickable = newClickable
 				hasClickable = true
-			
+
+
 func destroyClickable():
 	if (hasClickable):
+		var loc = "/root/n2_world/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount"
+		var inc = int(get_node(loc).get_text()) + 1
+		get_node(loc).set_text(str(inc))
 		clickable.queue_free()
-		
