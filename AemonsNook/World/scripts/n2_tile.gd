@@ -1,6 +1,9 @@
 extends Node2D
 const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
+var woodCounter
+var stoneCounter
+
 enum TILETYPE { GRASS, WATER, TREE, DIRT}
 
 var type = TILETYPE.GRASS
@@ -8,6 +11,9 @@ var seedID = "none"
 var clickable
 var hasClickable = false
 
+func _ready():
+	woodCounter = get_node("/root/n2_world/view/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount")
+	stoneCounter = get_node("/root/n2_world/view/GUI/HBoxContainer/Bars/Bar/StoneCounter/counterBg/counterCount")
 
 func clickable_clicked_received():
 	destroyClickable()
@@ -38,9 +44,23 @@ func createClickable(type):
 		hasClickable = true
 
 
+func calcAmount(node, amount):
+	return int(node.get_text()) + amount
+
+func addAmount(type, amount):
+	match (clickable.type):
+		CLICK_SCRIPT.CLICK_TYPE.TREE:
+			var a = calcAmount(woodCounter, amount)
+			woodCounter.set_text(str(a))
+			
+		CLICK_SCRIPT.CLICK_TYPE.STONE:
+			var a = calcAmount(stoneCounter, amount)
+			stoneCounter.set_text(str(a))
+
+
 func destroyClickable():
 	if (hasClickable):
-		var loc = "/root/n2_world/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount"
-		var inc = int(get_node(loc).get_text()) + 1
-		get_node(loc).set_text(str(inc))
+		addAmount(clickable.type, 1)
 		clickable.queue_free()
+			
+		

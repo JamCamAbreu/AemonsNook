@@ -1,16 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/scripts/n2_tiles.gd" type="Script" id=2]
+[ext_resource path="res://view.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/scripts/n2_tiles.gd" type="Script" id=3]
 
 [node name="n2_world" type="Node2D"]
 
-[node name="GUI" parent="." instance=ExtResource( 1 )]
-margin_right = 248.0
-margin_bottom = 80.0
+[node name="view" parent="." instance=ExtResource( 1 )]
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+
+[node name="GUI" parent="view" instance=ExtResource( 2 )]
+margin_left = -12.1483
+margin_top = -179.991
+margin_right = 235.852
+margin_bottom = -99.991
 
 [node name="n2_tiles" type="Node2D" parent="."]
-script = ExtResource( 2 )
+z_index = -2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="tileTimer" type="Timer" parent="n2_tiles"]
 

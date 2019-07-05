@@ -12,7 +12,7 @@ animations = [ {
 } ]
 
 [node name="n2_mouse" type="Node2D"]
-position = Vector2( -109.093, -103.284 )
+position = Vector2( 286.488, 549.308 )
 rotation = 0.523599
 script = ExtResource( 1 )
 

@@ -4,8 +4,8 @@ extends Node2D
 const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
-const WIDE = 80
-const TALL = 50
+const WIDE = 40
+const TALL = 25
 const TILE_SIZE_PIXELS = 16
 var tiles = []
 
@@ -13,6 +13,14 @@ enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 const GROW_ALL = "all"
 
 onready var tt = get_node("tileTimer")
+
+# Global use functions:
+func GetMapWidth():
+	return (WIDE*TILE_SIZE_PIXELS)
+func GetMapHeight():
+	return (TALL*TILE_SIZE_PIXELS)
+
+
 
 func _wait(seconds):
 	tt.set_wait_time(seconds)
