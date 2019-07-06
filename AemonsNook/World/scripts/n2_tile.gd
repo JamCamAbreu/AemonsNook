@@ -13,8 +13,8 @@ var clickable
 var hasClickable = false
 
 func _ready():
-	woodCounter = get_node("/root/n2_world/view/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount")
-	stoneCounter = get_node("/root/n2_world/view/GUI/HBoxContainer/Bars/Bar/StoneCounter/counterBg/counterCount")
+	woodCounter = get_node("/root/n2_world/GUICanvas/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount")
+	stoneCounter = get_node("/root/n2_world/GUICanvas/GUI/HBoxContainer/Bars/Bar/StoneCounter/counterBg/counterCount")
 
 func clickable_clicked_received():
 	destroyClickable()

@@ -1,22 +1,25 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://view.tscn" type="PackedScene" id=1]
-[ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://view.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/scripts/n2_tiles.gd" type="Script" id=3]
 
 [node name="n2_world" type="Node2D"]
 
-[node name="view" parent="." instance=ExtResource( 1 )]
+[node name="GUICanvas" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="GUI" parent="GUICanvas" instance=ExtResource( 1 )]
+margin_left = 16.0
+margin_top = 13.0
+margin_right = -18.0
+margin_bottom = 93.0
+
+[node name="view" parent="." instance=ExtResource( 2 )]
 drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-
-[node name="GUI" parent="view" instance=ExtResource( 2 )]
-margin_left = -12.1483
-margin_top = -179.991
-margin_right = 235.852
-margin_bottom = -99.991
 
 [node name="n2_tiles" type="Node2D" parent="."]
 z_index = -2
