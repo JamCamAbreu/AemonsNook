@@ -1,4 +1,5 @@
 extends Node2D
+var enums = preload("res://Global/globalEnums.gd")
 const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 var woodCounter
@@ -49,18 +50,17 @@ func calcAmount(node, amount):
 
 func addAmount(type, amount):
 	match (clickable.type):
-		CLICK_SCRIPT.CLICK_TYPE.TREE:
+		enums.CLICK_TYPE.TREE:
 			var a = calcAmount(woodCounter, amount)
 			woodCounter.set_text(str(a))
 			
-		CLICK_SCRIPT.CLICK_TYPE.STONE:
+		enums.CLICK_TYPE.STONE:
 			var a = calcAmount(stoneCounter, amount)
 			stoneCounter.set_text(str(a))
 
 
 func destroyClickable():
 	if (hasClickable):
-		addAmount(clickable.type, 1)
-		clickable.queue_free()
-			
+		addAmount(clickable.type, clickable.harvestAmount)
+		clickable.harvest()
 		

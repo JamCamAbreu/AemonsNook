@@ -1,6 +1,7 @@
 extends Node2D
 
 # get enum from tile:
+var enums = preload("res://Global/globalEnums.gd")
 const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
@@ -49,8 +50,8 @@ func _ready():
 	#_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
 	#_wait(2)
 	#yield(tt, "timeout")
-	createClickableRandom(CLICK_SCRIPT.CLICK_TYPE.TREE, 50)
-	createClickableRandom(CLICK_SCRIPT.CLICK_TYPE.STONE, 50)
+	createClickableRandom(enums.CLICK_TYPE.TREE, 50)
+	createClickableRandom(enums.CLICK_TYPE.STONE, 50)
 
 func createClickableRandom(type, amount):
 	for a in amount:

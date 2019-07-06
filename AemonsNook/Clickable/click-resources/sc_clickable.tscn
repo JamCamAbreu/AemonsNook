@@ -22,7 +22,7 @@ animations = [ {
 radius = 6.32526
 height = 3.66262
 
-[node name="resource_tree" type="Area2D"]
+[node name="resource" type="Area2D"]
 z_index = 1
 script = ExtResource( 1 )
 
