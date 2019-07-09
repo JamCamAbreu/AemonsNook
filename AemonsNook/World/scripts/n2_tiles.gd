@@ -1,6 +1,5 @@
 extends Node2D
 
-# get enum from tile:
 var enums = preload("res://Global/globalEnums.gd")
 const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
 const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
@@ -14,6 +13,10 @@ enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 const GROW_ALL = "all"
 
 onready var tt = get_node("tileTimer")
+func _wait(seconds):
+	tt.set_wait_time(seconds)
+	tt.set_one_shot(true)
+	tt.start()
 
 # Global use functions:
 func GetMapWidth():
@@ -22,44 +25,11 @@ func GetMapHeight():
 	return (TALL*TILE_SIZE_PIXELS)
 
 
-
-func _wait(seconds):
-	tt.set_wait_time(seconds)
-	tt.set_one_shot(true)
-	tt.start()
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	_generateTiles(TILE_SCRIPT.TILETYPE.GRASS)
 	
-	#_seedCenter(TILE_SCRIPT.TILETYPE.TREE, 20, "first")
-	#_growType(TILE_SCRIPT.TILETYPE.TREE, 4, "first", 0.5)
-	#_wait(2)
-	#yield(tt, "timeout")
-	
-	#_seedSide(TILE_SCRIPT.TILETYPE.TREE, MAPSIDE.TOP, 20, "side")
-	#_seedSide(TILE_SCRIPT.TILETYPE.TREE, MAPSIDE.TOP, 20, "side")
-	#_growType(TILE_SCRIPT.TILETYPE.TREE, 3, "side", 0.5)
-	#_wait(2)
-	#yield(tt, "timeout")
-	
-	_seedSide(TILE_SCRIPT.TILETYPE.WATER, MAPSIDE.RIGHT, 30, "river1")
-	_growType(TILE_SCRIPT.TILETYPE.WATER, 10, "river1", 0.5)
-	
-	#_seedRandom(TILE_SCRIPT.TILETYPE.DIRT, 3, "dirt1")
-	#_growType(TILE_SCRIPT.TILETYPE.DIRT, 12, "dirt1", 0.5)
-	#_wait(2)
-	#yield(tt, "timeout")
-	createClickableRandom(enums.CLICK_TYPE.TREE, 50)
-	createClickableRandom(enums.CLICK_TYPE.STONE, 50)
 
-func createClickableRandom(type, amount):
-	for a in amount:
-		var ranX = randi() % WIDE
-		var ranY = randi() % TALL
-		createClickablePos(ranX, ranY, type)
-	
-	
+# ---- TILES ---- #
 func _generateTiles(type):
 	var t = load("res://World/sc_tile.tscn")
 	var rows = TALL
@@ -73,16 +43,6 @@ func _generateTiles(type):
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
-
-
-
-func createClickablePos(x, y, type):
-	var curTile = tiles[y][x]
-	var thing2 = TILE_SCRIPT.TILETYPE.WATER
-	if (curTile.type != TILE_SCRIPT.TILETYPE.WATER):
-		curTile.createClickable(type)
-
-
 
 func _seedPos(x, y, _seedID, type):
 	tiles[y][x].setType(type)
@@ -154,9 +114,6 @@ func _growType(type, passes, seedID, growSpeed):
 		for x in range(WIDE - 1, 0, -1):
 			for y in TALL:
 				scanAndGrow(type, x, y, 3, 3, seedID)
-				
-		#_wait(.1)
-		#yield(tt, "timeout")
 
 func checkSeedID(tileSeed, _seedID):
 	if (_seedID == "all" or tileSeed == _seedID):
@@ -194,5 +151,23 @@ func scanAndGrow(type, x, y, rollMax, rollMaxInner, seedID):
 			if ((randi() % rollMaxInner) == 0):
 				checkTile.setType(type)
 				checkTile.seedID = seedID
+
+
+
+
+
+# ---- CLICKABLES ---- #
+func createClickablePos(x, y, type):
+	var curTile = tiles[y][x]
+	var thing2 = TILE_SCRIPT.TILETYPE.WATER
+	if (curTile.type != TILE_SCRIPT.TILETYPE.WATER):
+		curTile.createClickable(type)
+
+func createClickableRandom(type, amount):
+	for a in amount:
+		var ranX = randi() % WIDE
+		var ranY = randi() % TALL
+		createClickablePos(ranX, ranY, type)
+
 
 

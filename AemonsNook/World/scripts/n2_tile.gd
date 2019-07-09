@@ -1,6 +1,7 @@
 extends Node2D
-var enums = preload("res://Global/globalEnums.gd")
-const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
+const enums = preload("res://Global/globalEnums.gd")
+#const nodes = preload("res://Global/globalNodeStrings.gd")
+#const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 var woodCounter
 var stoneCounter
@@ -13,8 +14,8 @@ var clickable
 var hasClickable = false
 
 func _ready():
-	woodCounter = get_node("/root/n2_world/GUICanvas/GUI/HBoxContainer/Bars/Bar/WoodCounter/counterBg/counterCount")
-	stoneCounter = get_node("/root/n2_world/GUICanvas/GUI/HBoxContainer/Bars/Bar/StoneCounter/counterBg/counterCount")
+	woodCounter = get_node(globalNodeStrings.woodCounter)
+	stoneCounter = get_node(globalNodeStrings.stoneCounter)
 
 func clickable_clicked_received():
 	destroyClickable()
@@ -36,7 +37,8 @@ func setType(_type):
 	
 func createClickable(type):
 	if (hasClickable == false):
-		var t = load("res://Clickable/click-resources/sc_clickable.tscn")
+		
+		var t = load(globalPaths.clickableScene)
 		var newClickable = t.instance()
 		newClickable._setType(type)
 		add_child(newClickable)
