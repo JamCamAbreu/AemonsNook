@@ -1,5 +1,5 @@
 extends Node
 
-
-
 enum CLICK_TYPE { TREE, STONE }
+
+enum TILETYPE { GRASS, WATER, TREE, DIRT}

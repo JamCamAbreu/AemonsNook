@@ -1,11 +1,10 @@
 extends Node2D
 
 var enums = preload("res://Global/globalEnums.gd")
-const TILE_SCRIPT = preload("res://World/scripts/n2_tile.gd")
-const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
+#const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
-const WIDE = 40
-const TALL = 25
+const WIDE = 50
+const TALL = 35
 const TILE_SIZE_PIXELS = 16
 var tiles = []
 
@@ -26,7 +25,18 @@ func GetMapHeight():
 
 
 func _ready():
-	_generateTiles(TILE_SCRIPT.TILETYPE.GRASS)
+	_generateTiles(enums.TILETYPE.GRASS)
+	
+	var level = load("res://Levels/Level01.gd")
+	BuildWorldFromAscii(level.ascii)
+	
+	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
+	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
+	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
+	#_growType(enums.TILETYPE.WATER, 7, "ponds", 1)
+	
+	#_seedRandom(enums.TILETYPE.TREE, 3, "trees1")
+	#_growType(enums.TILETYPE.TREE, 10, "trees1", 1)
 	
 
 # ---- TILES ---- #
@@ -44,6 +54,10 @@ func _generateTiles(type):
 			add_child(newTile)
 			tiles[r][c] = newTile
 
+
+
+
+# ---- TILES: MAP SEEDING SYSTEM ---- #
 func _seedPos(x, y, _seedID, type):
 	tiles[y][x].setType(type)
 	tiles[y][x].seedID = _seedID
@@ -155,12 +169,31 @@ func scanAndGrow(type, x, y, rollMax, rollMaxInner, seedID):
 
 
 
+# ---- TILES: GENERATED FROM TXT FILE ---- #
+
+func BuildWorldFromAscii(input):
+	input = input.replace(" ", "")
+	input = input.replace("\n", "")
+	var i = 0
+	for y in TALL:
+		for x in WIDE:
+			SetTileType(y, x, input[i])
+			i += 1
+
+func SetTileType(row, column, symbol):
+	var tile = tiles[row][column]
+	match symbol:
+		'T':
+			tile.setType(enums.TILETYPE.TREE)
+		'W':
+			tile.setType(enums.TILETYPE.WATER)
+
 
 # ---- CLICKABLES ---- #
 func createClickablePos(x, y, type):
 	var curTile = tiles[y][x]
-	var thing2 = TILE_SCRIPT.TILETYPE.WATER
-	if (curTile.type != TILE_SCRIPT.TILETYPE.WATER):
+	var thing2 = enums.TILETYPE.WATER
+	if (curTile.type != enums.TILETYPE.WATER):
 		curTile.createClickable(type)
 
 func createClickableRandom(type, amount):
@@ -168,6 +201,9 @@ func createClickableRandom(type, amount):
 		var ranX = randi() % WIDE
 		var ranY = randi() % TALL
 		createClickablePos(ranX, ranY, type)
+
+
+
 
 
 

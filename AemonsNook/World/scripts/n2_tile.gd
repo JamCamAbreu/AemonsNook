@@ -1,34 +1,34 @@
 extends Node2D
 const enums = preload("res://Global/globalEnums.gd")
-#const nodes = preload("res://Global/globalNodeStrings.gd")
+const paths = preload("res://Global/globalPaths.gd")
 #const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 var woodCounter
 var stoneCounter
 
-enum TILETYPE { GRASS, WATER, TREE, DIRT}
 
-var type = TILETYPE.GRASS
+
+var type = enums.TILETYPE.GRASS
 var seedID = "none"
 var clickable
 var hasClickable = false
 
 func _ready():
-	woodCounter = get_node(globalNodeStrings.woodCounter)
-	stoneCounter = get_node(globalNodeStrings.stoneCounter)
+	woodCounter = get_node(paths.woodCounter)
+	stoneCounter = get_node(paths.stoneCounter)
 
 func clickable_clicked_received():
 	destroyClickable()
 
 func _setTexture(type):
 	match (type):
-		TILETYPE.GRASS:
+		enums.TILETYPE.GRASS:
 			get_node("sprite").set_animation("grass")
-		TILETYPE.WATER:
+		enums.TILETYPE.WATER:
 			get_node("sprite").set_animation("water")
-		TILETYPE.TREE:
+		enums.TILETYPE.TREE:
 			get_node("sprite").set_animation("tree")
-		TILETYPE.DIRT:
+		enums.TILETYPE.DIRT:
 			get_node("sprite").set_animation("dirt")
 
 func setType(_type):
