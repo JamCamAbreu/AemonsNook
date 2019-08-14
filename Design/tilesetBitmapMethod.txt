@@ -1,0 +1,32 @@
+
+* bit setting pattern:
+								 |4|
+							  |8| X |1|
+								 |2|
+* tile codes:
+	  ** ZERO PIECES ADJACENT **
+  0000            0       Horizontal Lane (default)
+
+	  ** ONE PIECE ADJACENT **
+  0001            1       Horizontal Lane
+  0010            2       Vertical Lane
+  0100            4       Vertical Lane
+  1000            8       Horizontal Lane
+
+	  ** TWO PIECES ADJACENT **
+  0110            6       Vertical Lane
+  1001            9       Horizontal Lane
+
+  1100            12      upLeft Corner
+  0101            5       upRight Corner
+  0011            3       downRight Corner
+  1010            10      downLeft Corner
+
+	  ** THREE PIECES ADJACENT **
+  0111            7       rightT
+  1011            11      downT
+  1110            14      leftT
+  1101            13      upT
+
+	  ** FOUR PIECES ADJACENT **
+  1111            15      Intersection

@@ -3,9 +3,11 @@ extends Node2D
 var enums = preload("res://Global/globalEnums.gd")
 #const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
-const WIDE = 50
-const TALL = 35
-const TILE_SIZE_PIXELS = 16
+var level
+
+var WIDE = 1
+var TALL = 1
+const TILE_SIZE_PIXELS = 32
 var tiles = []
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
@@ -23,12 +25,21 @@ func GetMapWidth():
 func GetMapHeight():
 	return (TALL*TILE_SIZE_PIXELS)
 
+func _enter_tree():
+	# Get this from a menu or something later:
+	var levelString = "res://Levels/Level02.gd"
+	var levelScript = load(levelString)
+	level = levelScript.new()
+	WIDE = level.WIDTH
+	TALL = level.HEIGHT
+
 
 func _ready():
-	_generateTiles(enums.TILETYPE.GRASS)
 	
-	var level = load("res://Levels/Level01.gd")
-	BuildWorldFromAscii(level.ascii)
+	_generateTiles(enums.TILETYPE.GRASS)
+	BuildWorldFromAscii(level.GetAscii())
+	
+	setSprites()
 	
 	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
 	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
@@ -172,8 +183,6 @@ func scanAndGrow(type, x, y, rollMax, rollMaxInner, seedID):
 # ---- TILES: GENERATED FROM TXT FILE ---- #
 
 func BuildWorldFromAscii(input):
-	input = input.replace(" ", "")
-	input = input.replace("\n", "")
 	var i = 0
 	for y in TALL:
 		for x in WIDE:
@@ -184,15 +193,16 @@ func SetTileType(row, column, symbol):
 	var tile = tiles[row][column]
 	match symbol:
 		'T':
-			tile.setType(enums.TILETYPE.TREE)
+			createClickablePos(column, row, enums.CLICK_TYPE.TREE)
 		'W':
 			tile.setType(enums.TILETYPE.WATER)
+		'D':
+			tile.setType(enums.TILETYPE.DIRT)
 
 
 # ---- CLICKABLES ---- #
 func createClickablePos(x, y, type):
 	var curTile = tiles[y][x]
-	var thing2 = enums.TILETYPE.WATER
 	if (curTile.type != enums.TILETYPE.WATER):
 		curTile.createClickable(type)
 
@@ -203,7 +213,66 @@ func createClickableRandom(type, amount):
 		createClickablePos(ranX, ranY, type)
 
 
+func tilesetCheckAbove(original_row, original_column, type):
+	if (original_row <= 0):
+		return true
+	else:
+		var checkTile = tiles[original_row - 1][original_column]
+		if (checkTile != null && checkTile.type == type):
+			return true
+		else:
+			return false
+
+func tilesetCheckBelow(original_row, original_column, type):
+	if (original_row >= TALL - 1):
+		return true
+	else:
+		var checkTile = tiles[original_row + 1][original_column]
+		if (checkTile != null && checkTile.type == type):
+			return true
+		else:
+			return false
+
+func tilesetCheckLeft(original_row, original_column, type):
+	if (original_column <= 0):
+		return true
+	else:
+		var checkTile = tiles[original_row][original_column - 1]
+		if (checkTile != null && checkTile.type == type):
+			return true
+		else:
+			return false
+
+func tilesetCheckRight(original_row, original_column, type):
+	if (original_column >= WIDE - 1):
+		return true
+	else:
+		var checkTile = tiles[original_row][original_column + 1]
+		if (checkTile != null && checkTile.type == type):
+			return true
+		else:
+			return false
 
 
+func getSpriteId(row, column, type):
+	var sprite_id = 0
+	
+	if (tilesetCheckAbove(row, column, type)):
+		sprite_id = sprite_id | 4
+	if (tilesetCheckRight(row, column, type)):
+		sprite_id = sprite_id | 1
+	if (tilesetCheckBelow(row, column, type)):
+		sprite_id = sprite_id | 2
+	if (tilesetCheckLeft(row, column, type)):
+		sprite_id = sprite_id | 8
+		
+	return sprite_id
 
-
+func setSprites():
+	var rows = TALL
+	var cols = WIDE
+	for r in range(rows):
+		for c in range(cols):
+			var curTile = tiles[r][c]
+			var id = getSpriteId(r, c, curTile.type)
+			curTile.setSprite(id)

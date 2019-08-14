@@ -6,7 +6,7 @@ const paths = preload("res://Global/globalPaths.gd")
 var woodCounter
 var stoneCounter
 
-
+var tileset_id
 
 var type = enums.TILETYPE.GRASS
 var seedID = "none"
@@ -16,6 +16,7 @@ var hasClickable = false
 func _ready():
 	woodCounter = get_node(paths.woodCounter)
 	stoneCounter = get_node(paths.stoneCounter)
+	tileset_id = 0 # default
 
 func clickable_clicked_received():
 	destroyClickable()
@@ -34,6 +35,12 @@ func _setTexture(type):
 func setType(_type):
 	type = _type
 	_setTexture(_type)
+	
+
+func setSprite(spriteId):
+	var label = get_node("debugLabel")
+	label.set_text(str(spriteId))
+
 	
 func createClickable(type):
 	if (hasClickable == false):

@@ -1,5 +1,13 @@
 extends Node
 
+const WIDTH = 50
+const HEIGHT = 35
+
+func GetAscii():
+	var output = String(ascii)
+	output = output.replace(" ", "")
+	output = output.replace("\n", "")
+	return output
 
 const ascii = """
 TTTTTTTTTTTTTTTTTTTTTTTTWWWWWWWWWWWWWWWWWWWWWWWWWW 
