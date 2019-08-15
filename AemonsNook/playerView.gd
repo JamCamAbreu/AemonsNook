@@ -1,10 +1,11 @@
 extends Camera2D
 export var panSpeed = 320.0
-export var scrollSpeed = 1.5
+export var scrollSpeed = 5
 var panBorderThickness = 25.0
 
 # Used to indicate the bounds of the map (for restricted cam movement)
 var panLimit = Vector2(20,20)
+var maxZoom = 0.35
 
 var mapWidth = 20 # just starting value
 var mapHeight = 20 # just starting value
@@ -42,20 +43,24 @@ func _input(e):
 func camMove(delta):
 	if m_position != null:
 		if Input.is_action_pressed("cam_up") || m_position.y <= panBorderThickness:
-			self.position.y -= panSpeed * delta
+			self.position.y -= panSpeed * delta * (1 + self.zoom.y)
 			
 		if Input.is_action_pressed("cam_right") || m_position.x >= get_viewport().size.x - panBorderThickness:
-			self.position.x += panSpeed * delta
+			self.position.x += panSpeed * delta * (1 + self.zoom.x)
 			
 		if Input.is_action_pressed("cam_down")  || m_position.y >= get_viewport().size.y - panBorderThickness:
-			self.position.y += panSpeed * delta
+			self.position.y += panSpeed * delta * (1 + self.zoom.y)
 			
 		if Input.is_action_pressed("cam_left") || m_position.x <= panBorderThickness:
-			self.position.x -= panSpeed * delta
+			self.position.x -= panSpeed * delta * (1 + self.zoom.x)
 		
 		if m_scrolling != 0:
 			self.zoom.x -= scrollSpeed * delta * m_scrolling
+			if (self.zoom.x < maxZoom):
+				self.zoom.x = maxZoom
 			self.zoom.y -= scrollSpeed * delta * m_scrolling
+			if (self.zoom.y < maxZoom):
+				self.zoom.y = maxZoom
 			m_scrolling = 0
 			
 		self.position.x = clamp(self.position.x, 0, mapWidth)

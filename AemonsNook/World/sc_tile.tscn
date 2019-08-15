@@ -1,10 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/scripts/n2_tile.gd" type="Script" id=1]
 [ext_resource path="res://World/textures/te_treeTile.tres" type="Texture" id=2]
-[ext_resource path="res://Resources/Textures/Water/water-One.png" type="Texture" id=3]
-[ext_resource path="res://World/textures/te_dirtTile.tres" type="Texture" id=4]
-[ext_resource path="res://World/textures/te_grassTile.tres" type="Texture" id=5]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-Horizontal.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-Vertical.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-CornerTopLeft.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-Corner-BottomLeft.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-TS-Left.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-CornerTopRight.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-TS-Top.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-Corner-BottomRight.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-TS-Bottom.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-TS-Right.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Textures/Dirt/Dirt-Intersection.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Textures/Water/water-One.png" type="Texture" id=14]
+[ext_resource path="res://World/textures/te_grassTile.tres" type="Texture" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -13,17 +23,17 @@ animations = [ {
 "name": "tree",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "dirt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "water",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "dirt",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 15 ) ],
 "loop": true,
 "name": "grass",
 "speed": 5.0
@@ -44,6 +54,7 @@ __meta__ = {
 }
 
 [node name="debugLabel" type="Label" parent="."]
+visible = false
 margin_left = -11.5769
 margin_top = -7.49995
 margin_right = 11.4231

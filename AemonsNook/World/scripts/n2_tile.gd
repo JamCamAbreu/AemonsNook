@@ -40,6 +40,9 @@ func setType(_type):
 func setSprite(spriteId):
 	var label = get_node("debugLabel")
 	label.set_text(str(spriteId))
+	
+	if (type == enums.TILETYPE.DIRT):
+		get_node("sprite").set_frame(spriteId)
 
 	
 func createClickable(type):
