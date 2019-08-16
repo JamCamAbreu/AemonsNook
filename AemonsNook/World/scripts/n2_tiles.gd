@@ -7,7 +7,7 @@ var level
 
 var WIDE = 1
 var TALL = 1
-const TILE_SIZE_PIXELS = 32
+var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
 var tiles = []
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
@@ -40,6 +40,7 @@ func _ready():
 	BuildWorldFromAscii(level.GetAscii())
 	
 	setSprites()
+	growTrees()
 	
 	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
 	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
@@ -61,6 +62,7 @@ func _generateTiles(type):
 		for c in range(cols):
 			var newTile = t.instance()
 			newTile.setType(type)
+			newTile.set_z_index(r*10)
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
@@ -193,7 +195,7 @@ func SetTileType(row, column, symbol):
 	var tile = tiles[row][column]
 	match symbol:
 		'T':
-			createClickablePos(column, row, enums.CLICK_TYPE.TREE)
+			tile.setType(enums.TILETYPE.TREE)
 		'W':
 			tile.setType(enums.TILETYPE.WATER)
 		'D':
@@ -276,3 +278,13 @@ func setSprites():
 			var curTile = tiles[r][c]
 			var id = getSpriteId(r, c, curTile.type)
 			curTile.setSprite(id)
+
+func growTrees():
+	var rows = TALL
+	var cols = WIDE
+	for r in range(rows):
+		for c in range(cols):
+			var curTile = tiles[r][c]
+			if (curTile.type == enums.TILETYPE.TREE):
+				var id = getSpriteId(r, c, curTile.type)
+				curTile.growTrees(id)

@@ -32,6 +32,7 @@ func _setType(_type):
 		enums.CLICK_TYPE.TREE:
 			get_node("sprite").set_animation("tree")
 			harvestAmount = 3
+			
 		enums.CLICK_TYPE.STONE:
 			get_node("sprite").set_animation("stone")
 			harvestAmount = 1
