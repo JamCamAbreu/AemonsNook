@@ -62,7 +62,6 @@ func _generateTiles(type):
 		for c in range(cols):
 			var newTile = t.instance()
 			newTile.setType(type)
-			newTile.set_z_index(r*10)
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile

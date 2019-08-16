@@ -10,7 +10,7 @@ func GetAscii():
 	return output
 
 const ascii = """
-TTTTTTTTTTTTTTTTTTTTTTTTT-------------------------
+--------------------------------------------------
 TTTTTTTTTTTTTTTTTTTTTTTTT-------------------------
 TTTTTTTTTTTTTTTTTTTTTTTT--------------------------
 TTTTTTTTTTTTTTTTTTTTTT--------------------DDDDDDDD

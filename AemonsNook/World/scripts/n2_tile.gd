@@ -61,7 +61,7 @@ func growTrees(spriteId):
 		# Horz Line
 		1, 8, 9:
 			for i in range(3):
-				var randX = rand_range(-1, 1)
+				var randX = rand_range(-0.8, 0.8)
 				var randY = rand_range(-0.3, 0.3)
 				createClickablePos(enums.TILETYPE.TREE, randX, randY) 
 			
@@ -69,7 +69,7 @@ func growTrees(spriteId):
 		2, 4, 6:
 			for i in range(3):
 				var randX = rand_range(-0.3, 0.3)
-				var randY = rand_range(-1, 1)
+				var randY = rand_range(-0.8, 0.8)
 				createClickablePos(enums.TILETYPE.TREE, randX, randY) 
 			
 		# Up Left Corner
@@ -106,15 +106,15 @@ func growTrees(spriteId):
 	
 		# All sides (dense)
 		15:
-			var randNum = randi() % 2 + 2
+			var randNum = randi() % 3 + 3
 			for i in range(randNum):
-				var randX = rand_range(-1, 1)
-				var randY = rand_range(-1, 1)
+				var randX = rand_range(-0.8, 0.8)
+				var randY = rand_range(-0.8, 0.8)
 				createClickablePos(enums.TILETYPE.TREE, randX, randY) 
 	
 	
 
-	
+
 
 	
 func createClickable(type):
@@ -137,7 +137,9 @@ func createClickablePos(type, xTranslation, yTranslation):
 		var spriteNum = randi() % enums.NUM_TREE_SPRITES
 		newClickable.get_node("sprite").set_frame(spriteNum)
 		newClickable.translate(Vector2(enums.TILE_SIZE_PIXELS/2 * xTranslation, enums.TILE_SIZE_PIXELS/2 * yTranslation))
-		newClickable.set_z_index(int((yTranslation + 1)*2))
+		var index = int(get_position().y + ((yTranslation + 1)*2))
+		newClickable.set_z_index(index)
+		#newClickable.setDebug(index)
 		add_child(newClickable)
 		newClickable.connect("clicked", self, "clickable_clicked_received")
 		clickable = newClickable

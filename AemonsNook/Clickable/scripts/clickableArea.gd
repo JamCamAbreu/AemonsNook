@@ -49,3 +49,6 @@ func harvest():
 	if (health <= 0):
 		self.queue_free()
 
+
+func setDebug(string):
+	get_node("debug").set_text(str(string))
