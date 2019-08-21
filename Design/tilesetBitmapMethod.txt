@@ -30,3 +30,4 @@
 
 	  ** FOUR PIECES ADJACENT **
   1111            15      Intersection
+

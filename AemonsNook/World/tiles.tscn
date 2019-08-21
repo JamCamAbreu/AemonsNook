@@ -10,5 +10,3 @@ __meta__ = {
 }
 
 [node name="tileTimer" type="Timer" parent="."]
-
-[node name="tileTimerInner" type="Timer" parent="."]

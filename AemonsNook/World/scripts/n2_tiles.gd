@@ -5,10 +5,14 @@ var enums = preload("res://Global/globalEnums.gd")
 
 var level
 
+var animationTimerMax = 60
+var animationTimer = animationTimerMax
+
 var WIDE = 1
 var TALL = 1
 var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
 var tiles = []
+var waterTiles = []
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 const GROW_ALL = "all"
@@ -42,6 +46,9 @@ func _ready():
 	setSprites()
 	growTrees()
 	
+	
+	
+	
 	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
 	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
 	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
@@ -49,6 +56,26 @@ func _ready():
 	
 	#_seedRandom(enums.TILETYPE.TREE, 3, "trees1")
 	#_growType(enums.TILETYPE.TREE, 10, "trees1", 1)
+	
+	
+func _process(delta):
+	animationTimer -= 1
+	if (animationTimer <= 0):
+		var numSparkles = randi() % 10 + 5
+		for i in range(numSparkles):
+			createWaterParticle()
+			animationTimer = (randi() % animationTimerMax/2) + animationTimerMax/2
+
+
+
+
+func createWaterParticle():
+	if (waterTiles.size() > 0):
+		var i = 0
+		var randomIndex = randi() % waterTiles.size()
+		var curTile = waterTiles[randomIndex]
+		curTile.createWaterSparkle()
+			
 	
 
 # ---- TILES ---- #
@@ -197,6 +224,7 @@ func SetTileType(row, column, symbol):
 			tile.setType(enums.TILETYPE.TREE)
 		'W':
 			tile.setType(enums.TILETYPE.WATER)
+			waterTiles.append(tile)
 		'D':
 			tile.setType(enums.TILETYPE.DIRT)
 

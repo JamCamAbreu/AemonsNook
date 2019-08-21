@@ -1,6 +1,7 @@
 extends Node2D
 const enums = preload("res://Global/globalEnums.gd")
 const paths = preload("res://Global/globalPaths.gd")
+const effect = preload("res://World/Effects/Effect.tscn")
 #const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 var woodCounter
@@ -38,10 +39,13 @@ func setType(_type):
 	
 
 func setSprite(spriteId):
-	var label = get_node("debugLabel")
+	#var label = get_node("debugLabel")
 	#label.set_text(str(spriteId))
 	
 	if (type == enums.TILETYPE.DIRT):
+		get_node("sprite").set_frame(spriteId)
+		
+	elif (type == enums.TILETYPE.WATER):
 		get_node("sprite").set_frame(spriteId)
 
 
@@ -165,3 +169,10 @@ func destroyClickable():
 		addAmount(clickable.type, clickable.harvestAmount)
 		clickable.harvest()
 		
+
+
+func createWaterSparkle():
+	var t = effect.instance()
+	add_child(t)
+
+
