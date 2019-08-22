@@ -13,6 +13,7 @@ var TALL = 1
 var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
 var tiles = []
 var waterTiles = []
+var peeps = []
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 const GROW_ALL = "all"
@@ -46,7 +47,7 @@ func _ready():
 	setSprites()
 	growTrees()
 	
-	
+	createPeepRandom(30)
 	
 	
 	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
@@ -66,6 +67,21 @@ func _process(delta):
 			createWaterParticle()
 			animationTimer = (randi() % animationTimerMax/2) + animationTimerMax/2
 
+
+func createPeepRandom(amount):
+	for a in amount:
+		var ranX = randi() % WIDE
+		var ranY = randi() % TALL
+		createPeep(ranX, ranY)
+
+
+func createPeep(tileX, tileY):
+	var curTile = tiles[tileY][tileX]
+	var ps = load("res://Peeps/Peep.tscn")
+	var p = ps.instance()
+	p.translate(Vector2(tileX * TILE_SIZE_PIXELS, tileY * TILE_SIZE_PIXELS))
+	peeps.append(p)
+	self.add_child(p)
 
 
 
