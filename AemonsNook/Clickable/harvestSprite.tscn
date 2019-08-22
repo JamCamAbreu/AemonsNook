@@ -18,6 +18,7 @@ animations = [ {
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
+z_index = 20
 frames = SubResource( 1 )
 animation = "stone"
 script = ExtResource( 3 )

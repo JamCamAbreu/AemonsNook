@@ -5,25 +5,27 @@ const HARVEST_SCENE = preload("res://Clickable/harvestSprite.tscn")
 var enums = preload("res://Global/globalEnums.gd")
 
 var type
-var health
+var health = 1
 var harvestAmount = 1
 
-func _ready():
-	setHealth()
 
-func setHealth():
+
+#func _ready():
+	
+
+func setHealth(modify):
 	match (type):
 		enums.CLICK_TYPE.TREE:
-			health = 5
+			health = 5 * modify
 		enums.CLICK_TYPE.STONE:
-			health = 7
+			health = 7 * modify
 
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			_createHarvestSprite()
-			emit_signal("clicked")
+			emit_signal("clicked", self)
 
 
 func _setType(_type):
@@ -31,17 +33,21 @@ func _setType(_type):
 	match (type):
 		enums.CLICK_TYPE.TREE:
 			get_node("sprite").set_animation("tree")
+			var randScale = rand_range(0.75, 1.5)
+			get_node("sprite").set_scale(Vector2(randScale, randScale))
 			harvestAmount = 3
+			setHealth(randScale) # trees worth more larger they are
 			
 		enums.CLICK_TYPE.STONE:
 			get_node("sprite").set_animation("stone")
 			harvestAmount = 1
-	setHealth()
+			setHealth(1)
 	
 func _createHarvestSprite():
 	var hs = HARVEST_SCENE.instance()
-	get_parent().add_child(hs)
+	add_child(hs)
 	hs.setType(type)
+	hs.set_z_index(get_z_index() + 10)
 	
 
 func harvest():
