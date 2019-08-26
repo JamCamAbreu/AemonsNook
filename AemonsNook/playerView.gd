@@ -1,10 +1,10 @@
 extends Camera2D
 export var panSpeed = 320.0
 export var scrollSpeed = 5
-var panBorderThickness = 25.0
+var panBorderThickness = 40.0
 
 # Used to indicate the bounds of the map (for restricted cam movement)
-var panLimit = Vector2(20,20)
+var panLimit = Vector2(-20,-20)
 var maxZoom = 0.35
 
 var mapWidth = 20 # just starting value

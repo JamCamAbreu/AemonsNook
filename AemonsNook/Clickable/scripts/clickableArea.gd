@@ -7,7 +7,7 @@ var enums = preload("res://Global/globalEnums.gd")
 var type
 var health = 1
 var harvestAmount = 1
-
+var createdScale
 
 
 #func _ready():
@@ -33,13 +33,15 @@ func _setType(_type):
 	match (type):
 		enums.CLICK_TYPE.TREE:
 			get_node("sprite").set_animation("tree")
-			var randScale = rand_range(0.75, 1.5)
-			get_node("sprite").set_scale(Vector2(randScale, randScale))
+			var randScale = rand_range(0.75, 1.75)
+			createdScale = Vector2(randScale, randScale)
+			get_node("sprite").set_scale(createdScale)
 			harvestAmount = 3
 			setHealth(randScale) # trees worth more larger they are
 			
 		enums.CLICK_TYPE.STONE:
 			get_node("sprite").set_animation("stone")
+			createdScale = Vector2(1, 1)
 			harvestAmount = 1
 			setHealth(1)
 	

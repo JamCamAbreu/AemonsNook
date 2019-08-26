@@ -7,6 +7,10 @@ const effect = preload("res://World/Effects/Effect.tscn")
 var woodCounter
 var stoneCounter
 
+var topAnimation = "none"
+
+var isBuildZone
+
 var tileset_id
 
 var type = enums.TILETYPE.GRASS
@@ -16,6 +20,14 @@ func _ready():
 	woodCounter = get_node(paths.woodCounter)
 	stoneCounter = get_node(paths.stoneCounter)
 	tileset_id = 0 # default
+	isBuildZone = false
+
+
+func SetBuildZone():
+	isBuildZone = true
+
+
+
 
 func clickable_clicked_received(obj):
 	harvestClickable(obj)
@@ -23,15 +35,26 @@ func clickable_clicked_received(obj):
 func _setTexture(type):
 	match (type):
 		enums.TILETYPE.GRASS:
-			get_node("topLayer").set_animation("grass")
+			get_node("bottomLayer").set_animation("none")
+			get_node("middleLayer").set_animation("grass")
+			get_node("topLayer").set_animation("none")
+			topAnimation = "none"
 		enums.TILETYPE.WATER:
-			get_node("topLayer").set_animation("water")
-			get_node("middleLayer").set_animation("dirt")
 			get_node("bottomLayer").set_animation("grass")
+			get_node("middleLayer").set_animation("dirt")
+			get_node("topLayer").set_animation("water")
+			topAnimation = "water"
 		enums.TILETYPE.TREE:
-			get_node("topLayer").set_animation("grass")
+			get_node("bottomLayer").set_animation("none")
+			get_node("middleLayer").set_animation("grass")
+			get_node("topLayer").set_animation("none")
+			topAnimation = "none"
 		enums.TILETYPE.DIRT:
-			get_node("topLayer").set_animation("dirt")
+			get_node("bottomLayer").set_animation("none")
+			get_node("middleLayer").set_animation("dirt")
+			get_node("topLayer").set_animation("none")
+			topAnimation = "none"
+			
 
 func setType(_type):
 	type = _type
@@ -43,12 +66,12 @@ func setSprite(spriteId):
 	#label.set_text(str(spriteId))
 	
 	if (type == enums.TILETYPE.DIRT):
-		get_node("topLayer").set_frame(spriteId)
 		get_node("middleLayer").set_frame(spriteId)
+		get_node("bottomLayer").set_frame(spriteId)
 		
 	elif (type == enums.TILETYPE.WATER):
-		get_node("topLayer").set_frame(spriteId)
 		get_node("middleLayer").set_frame(spriteId)
+		get_node("bottomLayer").set_frame(spriteId)
 
 
 
@@ -172,3 +195,11 @@ func createWaterSparkle():
 	add_child(t)
 
 
+
+
+func _on_Area2D_mouse_entered():
+	pass # Replace with function body.
+
+
+func _on_Area2D_mouse_exited():
+	pass # Replace with function body.

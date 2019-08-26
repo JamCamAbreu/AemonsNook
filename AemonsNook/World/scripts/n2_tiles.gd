@@ -331,3 +331,15 @@ func growTrees():
 			if (curTile.type == enums.TILETYPE.TREE):
 				var id = getSpriteId(r, c, curTile.type)
 				curTile.growTrees(id)
+				
+				
+func setBuildZoneTiles():
+	var rows = TALL
+	var cols = WIDE
+	for r in range(rows):
+		for c in range(cols):
+			var curTile = tiles[r][c]
+			if (curTile.type == enums.TILETYPE.GRASS):
+				var id = getSpriteId(r, c, enums.TILETYPE.DIRT) # get paths around this grass
+				
+				
