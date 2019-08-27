@@ -23,12 +23,6 @@ func _ready():
 	isBuildZone = false
 
 
-func SetBuildZone():
-	isBuildZone = true
-
-
-
-
 func clickable_clicked_received(obj):
 	harvestClickable(obj)
 
@@ -194,12 +188,3 @@ func createWaterSparkle():
 	var t = effect.instance()
 	add_child(t)
 
-
-
-
-func _on_Area2D_mouse_entered():
-	pass # Replace with function body.
-
-
-func _on_Area2D_mouse_exited():
-	pass # Replace with function body.

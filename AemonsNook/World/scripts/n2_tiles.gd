@@ -1,6 +1,7 @@
 extends Node2D
 
 var enums = preload("res://Global/globalEnums.gd")
+const globalMethods = preload("res://Global/globalMethods.gd")
 #const CLICK_SCRIPT = preload("res://Clickable/scripts/clickableArea.gd")
 
 var level
@@ -46,6 +47,8 @@ func _ready():
 	
 	setSprites()
 	growTrees()
+	
+	setBuildZoneTiles()
 	
 	createPeepRandom(30)
 	
@@ -341,5 +344,34 @@ func setBuildZoneTiles():
 			var curTile = tiles[r][c]
 			if (curTile.type == enums.TILETYPE.GRASS):
 				var id = getSpriteId(r, c, enums.TILETYPE.DIRT) # get paths around this grass
-				
-				
+				curTile.isBuildZone = isBuildZoneType(id)
+
+
+func isBuildZoneType(tileShape):
+	var shape = globalMethods.TILE_GET_SHAPE_NAME(tileShape)
+	match (shape):
+		
+		enums.TILE_SHAPE.EMPTY:
+			return false
+		enums.TILE_SHAPE.HORIZONTAL:
+			return true
+		enums.TILE_SHAPE.VERTICAL:
+			return true
+		enums.TILE_SHAPE.UP_LEFT:
+			return true
+		enums.TILE_SHAPE.UP_RIGHT:
+			return true
+		enums.TILE_SHAPE.DOWN_RIGHT:
+			return true
+		enums.TILE_SHAPE.DOWN_LEFT:
+			return true
+		enums.TILE_SHAPE.RIGHT_T:
+			return true
+		enums.TILE_SHAPE.DOWN_T:
+			return true
+		enums.TILE_SHAPE.LEFT_T:
+			return true
+		enums.TILE_SHAPE.UP_T:
+			return true
+		enums.TILE_SHAPE.INTERSECTION:
+			return true
