@@ -28,7 +28,10 @@ animations = [ {
 radius = 7.61918
 height = 18.4754
 
-[node name="resource" type="Area2D"]
+[node name="resource" type="Area2D" groups=[
+"Clickables",
+"Objects",
+]]
 z_index = 1
 script = ExtResource( 1 )
 

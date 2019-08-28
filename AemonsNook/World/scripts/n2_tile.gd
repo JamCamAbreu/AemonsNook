@@ -44,7 +44,7 @@ func _setTexture(type):
 			get_node("topLayer").set_animation("none")
 			topAnimation = "none"
 		enums.TILETYPE.DIRT:
-			get_node("bottomLayer").set_animation("none")
+			get_node("bottomLayer").set_animation("grass")
 			get_node("middleLayer").set_animation("dirt")
 			get_node("topLayer").set_animation("none")
 			topAnimation = "none"
@@ -65,7 +65,7 @@ func setSprite(spriteId):
 		
 	elif (type == enums.TILETYPE.WATER):
 		get_node("middleLayer").set_frame(spriteId)
-		get_node("bottomLayer").set_frame(spriteId)
+		get_node("topLayer").set_frame(spriteId)
 
 
 

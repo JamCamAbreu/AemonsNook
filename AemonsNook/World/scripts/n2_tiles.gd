@@ -261,9 +261,12 @@ func createClickableRandom(type, amount):
 		createClickablePos(ranX, ranY, type)
 
 
-func tilesetCheckAbove(original_row, original_column, type):
+func tilesetCheckAbove(original_row, original_column, type, includeBoundaries):
 	if (original_row <= 0):
-		return true
+		if (includeBoundaries):
+			return true
+		else:
+			return false
 	else:
 		var checkTile = tiles[original_row - 1][original_column]
 		if (checkTile != null && checkTile.type == type):
@@ -271,9 +274,12 @@ func tilesetCheckAbove(original_row, original_column, type):
 		else:
 			return false
 
-func tilesetCheckBelow(original_row, original_column, type):
+func tilesetCheckBelow(original_row, original_column, type, includeBoundaries):
 	if (original_row >= TALL - 1):
-		return true
+		if (includeBoundaries):
+			return true
+		else:
+			return false
 	else:
 		var checkTile = tiles[original_row + 1][original_column]
 		if (checkTile != null && checkTile.type == type):
@@ -281,9 +287,12 @@ func tilesetCheckBelow(original_row, original_column, type):
 		else:
 			return false
 
-func tilesetCheckLeft(original_row, original_column, type):
+func tilesetCheckLeft(original_row, original_column, type, includeBoundaries):
 	if (original_column <= 0):
-		return true
+		if (includeBoundaries):
+			return true
+		else:
+			return false
 	else:
 		var checkTile = tiles[original_row][original_column - 1]
 		if (checkTile != null && checkTile.type == type):
@@ -291,9 +300,12 @@ func tilesetCheckLeft(original_row, original_column, type):
 		else:
 			return false
 
-func tilesetCheckRight(original_row, original_column, type):
+func tilesetCheckRight(original_row, original_column, type, includeBoundaries):
 	if (original_column >= WIDE - 1):
-		return true
+		if (includeBoundaries):
+			return true
+		else:
+			return false
 	else:
 		var checkTile = tiles[original_row][original_column + 1]
 		if (checkTile != null && checkTile.type == type):
@@ -302,16 +314,16 @@ func tilesetCheckRight(original_row, original_column, type):
 			return false
 
 
-func getSpriteId(row, column, type):
+func getSpriteId(row, column, type, includeBoundaries):
 	var sprite_id = 0
 	
-	if (tilesetCheckAbove(row, column, type)):
+	if (tilesetCheckAbove(row, column, type, includeBoundaries)):
 		sprite_id = sprite_id | 4
-	if (tilesetCheckRight(row, column, type)):
+	if (tilesetCheckRight(row, column, type, includeBoundaries)):
 		sprite_id = sprite_id | 1
-	if (tilesetCheckBelow(row, column, type)):
+	if (tilesetCheckBelow(row, column, type, includeBoundaries)):
 		sprite_id = sprite_id | 2
-	if (tilesetCheckLeft(row, column, type)):
+	if (tilesetCheckLeft(row, column, type, includeBoundaries)):
 		sprite_id = sprite_id | 8
 		
 	return sprite_id
@@ -322,7 +334,7 @@ func setSprites():
 	for r in range(rows):
 		for c in range(cols):
 			var curTile = tiles[r][c]
-			var id = getSpriteId(r, c, curTile.type)
+			var id = getSpriteId(r, c, curTile.type, true)
 			curTile.setSprite(id)
 
 func growTrees():
@@ -332,7 +344,7 @@ func growTrees():
 		for c in range(cols):
 			var curTile = tiles[r][c]
 			if (curTile.type == enums.TILETYPE.TREE):
-				var id = getSpriteId(r, c, curTile.type)
+				var id = getSpriteId(r, c, curTile.type, true)
 				curTile.growTrees(id)
 				
 				
@@ -343,7 +355,7 @@ func setBuildZoneTiles():
 		for c in range(cols):
 			var curTile = tiles[r][c]
 			if (curTile.type == enums.TILETYPE.GRASS):
-				var id = getSpriteId(r, c, enums.TILETYPE.DIRT) # get paths around this grass
+				var id = getSpriteId(r, c, enums.TILETYPE.DIRT, false) # get paths around this grass
 				curTile.isBuildZone = isBuildZoneType(id)
 
 
