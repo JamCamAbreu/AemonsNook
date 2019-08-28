@@ -23,6 +23,24 @@ func _ready():
 	isBuildZone = false
 
 
+func CreateBuildUI():
+	var bs = load(globalPaths.buildSelection)
+	var cur = bs.instance()
+	cur.translate(Vector2(0, 0))
+	# Todo: Set a "target" position, using trig
+	# Then, ease circles to position
+	# Then, make a "build mode", that cancels
+	# unless you click one of the circles
+	# Cancelling a build mode will destroy
+	# all build selections. 
+	# The build selections themselves will have
+	# an on click event, also destroying all
+	# selections
+	add_child(cur)
+
+
+
+
 func clickable_clicked_received(obj):
 	harvestClickable(obj)
 
@@ -188,3 +206,10 @@ func createWaterSparkle():
 	var t = effect.instance()
 	add_child(t)
 
+
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			if (isBuildZone):
+				CreateBuildUI()

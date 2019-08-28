@@ -63,13 +63,17 @@ func _ready():
 	
 	
 func _process(delta):
+	#ProcessAnimations()
+	pass
+
+
+func ProcessAnimations():
 	animationTimer -= 1
 	if (animationTimer <= 0):
 		var numSparkles = randi() % 10 + 5
 		for i in range(numSparkles):
 			createWaterParticle()
 			animationTimer = (randi() % animationTimerMax/2) + animationTimerMax/2
-
 
 func createPeepRandom(amount):
 	for a in amount:
