@@ -2,6 +2,11 @@ extends Node
 
 const enums = preload("res://Global/globalEnums.gd")
 
+
+static func Ease(currentVal, targetVal, speed):
+	return currentVal + (targetVal - currentVal) * speed
+
+
 static func TILE_GET_SHAPE_NAME(number):
 	match (number):
 		0:

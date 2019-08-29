@@ -24,7 +24,7 @@ func _ready():
 
 
 func CreateBuildUI():
-	var amountNodes = 10
+	var amountNodes = 5
 	
 	var bs = load(globalPaths.buildSelection)
 	
@@ -39,8 +39,11 @@ func CreateBuildUI():
 		if (i + 1 <= maxNodes):
 			var cur = bs.instance()
 			var pos = deg2rad(centerAngle - (spread/2) + (spaceAmount*i))
-			cur.translate(Vector2(cos(pos)*radius, sin(pos)*radius))
+			cur.target = Vector2(cos(pos)*radius, sin(pos)*radius)
+			cur.ready = true
 			add_child(cur)
+			
+	emit_signal("buildModeStarted")
 
 	# Todo: Set a "target" position, using trig
 	# Then, ease circles to position
