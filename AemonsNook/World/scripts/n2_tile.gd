@@ -24,9 +24,24 @@ func _ready():
 
 
 func CreateBuildUI():
+	var amountNodes = 10
+	
 	var bs = load(globalPaths.buildSelection)
-	var cur = bs.instance()
-	cur.translate(Vector2(0, 0))
+	
+	var radius = 45  # distance in pixels
+	var centerAngle = -90 # degrees
+	var spaceAmount = 45  # degrees
+	
+	var maxNodes =  360/spaceAmount
+	
+	var spread = (amountNodes - 1)*spaceAmount
+	for i in amountNodes:
+		if (i + 1 <= maxNodes):
+			var cur = bs.instance()
+			var pos = deg2rad(centerAngle - (spread/2) + (spaceAmount*i))
+			cur.translate(Vector2(cos(pos)*radius, sin(pos)*radius))
+			add_child(cur)
+
 	# Todo: Set a "target" position, using trig
 	# Then, ease circles to position
 	# Then, make a "build mode", that cancels
@@ -36,9 +51,6 @@ func CreateBuildUI():
 	# The build selections themselves will have
 	# an on click event, also destroying all
 	# selections
-	add_child(cur)
-
-
 
 
 func clickable_clicked_received(obj):
