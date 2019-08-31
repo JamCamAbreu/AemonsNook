@@ -24,16 +24,21 @@ func _ready():
 
 
 func CreateBuildUI():
-	var amountNodes = 5
+	var worldNode = get_node(paths.worldNode)
+	worldNode.mode = enums.MODE.BUILD
+	worldNode.mouseState = enums.MOUSE_STATE.OUTSIDE
+	var amountNodes = worldNode.debugNodeNum
+	if (amountNodes == 8):
+		worldNode.debugNodeNum = 1
+	else:
+		worldNode.debugNodeNum = amountNodes + 1
 	
 	var bs = load(globalPaths.buildSelection)
 	
 	var radius = 45  # distance in pixels
 	var centerAngle = -90 # degrees
 	var spaceAmount = 45  # degrees
-	
 	var maxNodes =  360/spaceAmount
-	
 	var spread = (amountNodes - 1)*spaceAmount
 	for i in amountNodes:
 		if (i + 1 <= maxNodes):
@@ -45,15 +50,9 @@ func CreateBuildUI():
 			
 	emit_signal("buildModeStarted")
 
-	# Todo: Set a "target" position, using trig
-	# Then, ease circles to position
-	# Then, make a "build mode", that cancels
-	# unless you click one of the circles
-	# Cancelling a build mode will destroy
-	# all build selections. 
-	# The build selections themselves will have
-	# an on click event, also destroying all
-	# selections
+
+
+
 
 
 func clickable_clicked_received(obj):
@@ -224,7 +223,8 @@ func createWaterSparkle():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
+	var worldNode = get_node(paths.worldNode)
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			if (isBuildZone):
+			if (isBuildZone && (worldNode.mode != enums.MODE.BUILD)):
 				CreateBuildUI()

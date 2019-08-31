@@ -9,159 +9,226 @@ script = ExtResource( 1 )
 margin_right = 500.0
 margin_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="rows" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 530.0
+margin_bottom = 84.0
+
+[node name="row1" type="HBoxContainer" parent="MarginContainer/rows"]
+editor/display_folded = true
 margin_right = 530.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 
-[node name="FPS" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="FPS" type="MarginContainer" parent="MarginContainer/rows/row1"]
 editor/display_folded = true
 margin_right = 70.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 70, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/FPS"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/FPS"]
 margin_right = 70.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/FPS/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/FPS/Rect"]
 margin_right = 30.0
 margin_bottom = 40.0
 text = "FPS:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/FPS/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/FPS/Rect"]
 margin_left = 35.0
 margin_right = 65.0
 margin_bottom = 40.0
 text = "12"
 valign = 1
 
-[node name="NumNodes" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="NumNodes" type="MarginContainer" parent="MarginContainer/rows/row1"]
+editor/display_folded = true
 margin_left = 74.0
 margin_right = 154.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 80, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/NumNodes"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/NumNodes"]
 margin_right = 80.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/NumNodes/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/NumNodes/Rect"]
 margin_right = 50.0
 margin_bottom = 40.0
 text = "total:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/NumNodes/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/NumNodes/Rect"]
 margin_left = 55.0
 margin_right = 85.0
 margin_bottom = 40.0
 text = "12"
 valign = 1
 
-[node name="NumTiles" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="NumTiles" type="MarginContainer" parent="MarginContainer/rows/row1"]
 editor/display_folded = true
 margin_left = 158.0
 margin_right = 248.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 90, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/NumTiles"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/NumTiles"]
 margin_right = 90.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/NumTiles/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/NumTiles/Rect"]
 margin_right = 50.0
 margin_bottom = 40.0
 text = "Tiles:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/NumTiles/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/NumTiles/Rect"]
 margin_left = 55.0
 margin_right = 85.0
 margin_bottom = 40.0
 text = "12"
 valign = 1
 
-[node name="NumClickables" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="NumClickables" type="MarginContainer" parent="MarginContainer/rows/row1"]
 editor/display_folded = true
 margin_left = 252.0
 margin_right = 342.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 90, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/NumClickables"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/NumClickables"]
 margin_right = 90.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/NumClickables/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/NumClickables/Rect"]
 margin_right = 50.0
 margin_bottom = 40.0
 text = "Clicks:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/NumClickables/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/NumClickables/Rect"]
 margin_left = 55.0
 margin_right = 85.0
 margin_bottom = 40.0
 text = "12"
 valign = 1
 
-[node name="NumEffects" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="NumEffects" type="MarginContainer" parent="MarginContainer/rows/row1"]
 editor/display_folded = true
 margin_left = 346.0
 margin_right = 436.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 90, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/NumEffects"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/NumEffects"]
 margin_right = 90.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/NumEffects/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/NumEffects/Rect"]
 margin_right = 50.0
 margin_bottom = 40.0
 text = "Effects:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/NumEffects/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/NumEffects/Rect"]
 margin_left = 55.0
 margin_right = 85.0
 margin_bottom = 40.0
 text = "12"
 valign = 1
 
-[node name="NumPeeps" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="NumPeeps" type="MarginContainer" parent="MarginContainer/rows/row1"]
 margin_left = 440.0
 margin_right = 530.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 90, 0 )
 
-[node name="Rect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/NumPeeps"]
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row1/NumPeeps"]
 margin_right = 90.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
 
-[node name="label" type="Label" parent="MarginContainer/HBoxContainer/NumPeeps/Rect"]
+[node name="label" type="Label" parent="MarginContainer/rows/row1/NumPeeps/Rect"]
 margin_right = 50.0
 margin_bottom = 40.0
 text = "Peeps:"
 align = 2
 valign = 1
 
-[node name="value" type="Label" parent="MarginContainer/HBoxContainer/NumPeeps/Rect"]
+[node name="value" type="Label" parent="MarginContainer/rows/row1/NumPeeps/Rect"]
 margin_left = 55.0
 margin_right = 85.0
 margin_bottom = 40.0
+text = "12"
+valign = 1
+
+[node name="row2" type="HBoxContainer" parent="MarginContainer/rows"]
+margin_top = 44.0
+margin_right = 530.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="mode" type="MarginContainer" parent="MarginContainer/rows/row2"]
+margin_right = 130.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row2/mode"]
+margin_right = 130.0
+margin_bottom = 40.0
+region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
+
+[node name="label" type="Label" parent="MarginContainer/rows/row2/mode/Rect"]
+margin_right = 45.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 45, 0 )
+text = "MODE"
+align = 2
+valign = 1
+
+[node name="value" type="Label" parent="MarginContainer/rows/row2/mode/Rect"]
+margin_left = 50.0
+margin_right = 130.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
+text = "12"
+valign = 1
+
+[node name="mouseState" type="MarginContainer" parent="MarginContainer/rows/row2"]
+margin_left = 134.0
+margin_right = 264.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row2/mouseState"]
+margin_right = 130.0
+margin_bottom = 40.0
+region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
+
+[node name="label" type="Label" parent="MarginContainer/rows/row2/mouseState/Rect"]
+margin_right = 45.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 45, 0 )
+text = "Mouse
+State"
+align = 2
+valign = 1
+
+[node name="value" type="Label" parent="MarginContainer/rows/row2/mouseState/Rect"]
+margin_left = 50.0
+margin_right = 130.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
 text = "12"
 valign = 1
