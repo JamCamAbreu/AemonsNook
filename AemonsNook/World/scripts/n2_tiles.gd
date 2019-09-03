@@ -33,7 +33,7 @@ func GetMapHeight():
 
 func _enter_tree():
 	# Get this from a menu or something later:
-	var levelString = "res://Levels/Level02.gd"
+	var levelString = "res://Levels/Level03.gd"
 	var levelScript = load(levelString)
 	level = levelScript.new()
 	WIDE = level.WIDTH
@@ -119,116 +119,6 @@ func _generateTiles(type):
 
 
 
-# ---- TILES: MAP SEEDING SYSTEM ---- #
-func _seedPos(x, y, _seedID, type):
-	tiles[y][x].setType(type)
-	tiles[y][x].seedID = _seedID
-
-func _seedCenter(type, amount, seedID):
-	randomize()
-	var centerX = WIDE/2
-	var centerY = TALL/2
-	var reachX = int(WIDE*0.75)
-	var reachY = int(TALL*0.2)
-	for a in range(amount):
-		var ranX = centerX + ((randi() % reachX) - reachX/2)
-		var ranY = centerY + ((randi() % reachY) - reachY/2)
-		_seedPos(ranX, ranY, seedID, type)
-
-func _seedRandom(type, amount, seedID):
-	for a in amount:
-		var ranX = randi() % WIDE
-		var ranY = randi() % TALL
-		_seedPos(ranX, ranY, seedID, type)
-
-func _seedSide(type, side, amount, seedID):
-	match (side):
-		MAPSIDE.TOP:
-			var maxVariance = int(TALL/10)
-			for a in amount:
-				var variance = randi() % maxVariance
-				var posX = (WIDE/amount)*a
-				_seedPos(posX, 0 + variance, seedID, type)
-		MAPSIDE.RIGHT:
-			var maxVariance = int(WIDE/10)
-			for a in amount:
-				var variance = randi() % maxVariance
-				var posY = (TALL/amount)*a
-				_seedPos(WIDE - 1 - variance, posY, seedID, type)
-		MAPSIDE.BOTTOM:
-			var maxVariance = int(TALL/10)
-			for a in amount:
-				var variance = randi() % maxVariance
-				var posX = (WIDE/amount)*a
-				_seedPos(posX, TALL - 1 - variance, seedID, type)
-		MAPSIDE.LEFT:
-			var maxVariance = int(WIDE/10)
-			for a in amount:
-				var variance = randi() % maxVariance
-				var posY = (TALL/amount)*a
-				_seedPos(0 + variance, posY, seedID, type)
-
-func _growType(type, passes, seedID, growSpeed):
-	
-	# TOP TOP BOTTOM:
-	for p in passes:
-		for x in WIDE:
-			for y in TALL:
-				scanAndGrow(type, x, y, 3, 3, seedID)
-
-		# BOTTOM TO TOP:
-		for x in range(WIDE - 1, 0, -1):
-			for y in range(TALL - 1, 0, -1):
-				scanAndGrow(type, x, y, 3, 3, seedID)
-
-		# LEFT TO RIGHT:
-		for x in WIDE:
-			for y in range(TALL - 1, 0, -1):
-				scanAndGrow(type, x, y, 3, 3, seedID)
-
-		# RIGHT TO LEFT:
-		for x in range(WIDE - 1, 0, -1):
-			for y in TALL:
-				scanAndGrow(type, x, y, 3, 3, seedID)
-
-func checkSeedID(tileSeed, _seedID):
-	if (_seedID == "all" or tileSeed == _seedID):
-		return true
-	else:
-		return false
-
-func scanAndGrow(type, x, y, rollMax, rollMaxInner, seedID):
-	var checkTile
-	var curTile = tiles[y][x]
-	if (curTile.type == type and checkSeedID(curTile.seedID, seedID)):
-		var roll = randi() % rollMax
-		
-		# CHECK FOR BOUNDARIES:
-		if (x > 0) and (roll == 0): # CHECK LEFT BOUNDARY
-			checkTile = tiles[y][x - 1]
-			if ((randi() % rollMaxInner) == 0):
-				checkTile.setType(type)
-				checkTile.seedID = seedID
-			
-		if (x < WIDE - 1) and (roll == 0): # CHECK RIGHT BOUNDARY
-			checkTile = tiles[y][x + 1]
-			if ((randi() % rollMaxInner) == 0):
-				checkTile.setType(type)
-				checkTile.seedID = seedID
-			
-		if (y > 0) and (roll == 0): # CHECK TOP BOUNDARY
-			checkTile = tiles[y - 1][x]
-			if ((randi() % rollMaxInner) == 0):
-				checkTile.setType(type)
-				checkTile.seedID = seedID
-			
-		if (y < TALL - 1) and (roll == 0): # CHECK BOTTOM BOUNDARY
-			checkTile = tiles[y + 1][x]
-			if ((randi() % rollMaxInner) == 0):
-				checkTile.setType(type)
-				checkTile.seedID = seedID
-
-
 
 
 # ---- TILES: GENERATED FROM TXT FILE ---- #
@@ -250,7 +140,11 @@ func SetTileType(row, column, symbol):
 			waterTiles.append(tile)
 		'D':
 			tile.setType(enums.TILETYPE.DIRT)
-
+			
+		'1':
+			tile.setType(enums.TILETYPE.DIRT)
+			tile.mapEdge = true
+			tile.mapEdgeId = 1
 
 # ---- CLICKABLES ---- #
 func createClickablePos(x, y, type):
@@ -391,3 +285,122 @@ func isBuildZoneType(tileShape):
 			return true
 		enums.TILE_SHAPE.INTERSECTION:
 			return true
+			
+
+
+
+
+
+
+# ---- TILES: MAP SEEDING SYSTEM ---- #
+func _seedPos(x, y, _seedID, type):
+	tiles[y][x].setType(type)
+	tiles[y][x].seedID = _seedID
+
+func _seedCenter(type, amount, seedID):
+	randomize()
+	var centerX = WIDE/2
+	var centerY = TALL/2
+	var reachX = int(WIDE*0.75)
+	var reachY = int(TALL*0.2)
+	for a in range(amount):
+		var ranX = centerX + ((randi() % reachX) - reachX/2)
+		var ranY = centerY + ((randi() % reachY) - reachY/2)
+		_seedPos(ranX, ranY, seedID, type)
+
+func _seedRandom(type, amount, seedID):
+	for a in amount:
+		var ranX = randi() % WIDE
+		var ranY = randi() % TALL
+		_seedPos(ranX, ranY, seedID, type)
+
+func _seedSide(type, side, amount, seedID):
+	match (side):
+		MAPSIDE.TOP:
+			var maxVariance = int(TALL/10)
+			for a in amount:
+				var variance = randi() % maxVariance
+				var posX = (WIDE/amount)*a
+				_seedPos(posX, 0 + variance, seedID, type)
+		MAPSIDE.RIGHT:
+			var maxVariance = int(WIDE/10)
+			for a in amount:
+				var variance = randi() % maxVariance
+				var posY = (TALL/amount)*a
+				_seedPos(WIDE - 1 - variance, posY, seedID, type)
+		MAPSIDE.BOTTOM:
+			var maxVariance = int(TALL/10)
+			for a in amount:
+				var variance = randi() % maxVariance
+				var posX = (WIDE/amount)*a
+				_seedPos(posX, TALL - 1 - variance, seedID, type)
+		MAPSIDE.LEFT:
+			var maxVariance = int(WIDE/10)
+			for a in amount:
+				var variance = randi() % maxVariance
+				var posY = (TALL/amount)*a
+				_seedPos(0 + variance, posY, seedID, type)
+
+func _growType(type, passes, seedID, growSpeed):
+	
+	# TOP TOP BOTTOM:
+	for p in passes:
+		for x in WIDE:
+			for y in TALL:
+				scanAndGrow(type, x, y, 3, 3, seedID)
+
+		# BOTTOM TO TOP:
+		for x in range(WIDE - 1, 0, -1):
+			for y in range(TALL - 1, 0, -1):
+				scanAndGrow(type, x, y, 3, 3, seedID)
+
+		# LEFT TO RIGHT:
+		for x in WIDE:
+			for y in range(TALL - 1, 0, -1):
+				scanAndGrow(type, x, y, 3, 3, seedID)
+
+		# RIGHT TO LEFT:
+		for x in range(WIDE - 1, 0, -1):
+			for y in TALL:
+				scanAndGrow(type, x, y, 3, 3, seedID)
+
+func checkSeedID(tileSeed, _seedID):
+	if (_seedID == "all" or tileSeed == _seedID):
+		return true
+	else:
+		return false
+
+func scanAndGrow(type, x, y, rollMax, rollMaxInner, seedID):
+	var checkTile
+	var curTile = tiles[y][x]
+	if (curTile.type == type and checkSeedID(curTile.seedID, seedID)):
+		var roll = randi() % rollMax
+		
+		# CHECK FOR BOUNDARIES:
+		if (x > 0) and (roll == 0): # CHECK LEFT BOUNDARY
+			checkTile = tiles[y][x - 1]
+			if ((randi() % rollMaxInner) == 0):
+				checkTile.setType(type)
+				checkTile.seedID = seedID
+			
+		if (x < WIDE - 1) and (roll == 0): # CHECK RIGHT BOUNDARY
+			checkTile = tiles[y][x + 1]
+			if ((randi() % rollMaxInner) == 0):
+				checkTile.setType(type)
+				checkTile.seedID = seedID
+			
+		if (y > 0) and (roll == 0): # CHECK TOP BOUNDARY
+			checkTile = tiles[y - 1][x]
+			if ((randi() % rollMaxInner) == 0):
+				checkTile.setType(type)
+				checkTile.seedID = seedID
+			
+		if (y < TALL - 1) and (roll == 0): # CHECK BOTTOM BOUNDARY
+			checkTile = tiles[y + 1][x]
+			if ((randi() % rollMaxInner) == 0):
+				checkTile.setType(type)
+				checkTile.seedID = seedID
+
+
+
+

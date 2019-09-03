@@ -9,6 +9,10 @@ var stoneCounter
 
 var topAnimation = "none"
 
+# Peeps
+var mapEdge = false
+var mapEdgeId = -1
+
 var isBuildZone
 
 var tileset_id

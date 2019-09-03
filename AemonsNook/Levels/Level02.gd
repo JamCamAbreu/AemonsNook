@@ -13,8 +13,8 @@ const ascii = """
 TTTTTTTTTTTTTTTTTTTTTTTTT-------------------------
 TTTTTTTTTTTTTTTTTTTTTTTTT-------------------------
 TTTTTTTTTTTTTTTTTTTTTTTT--------------------------
-TTTTTTTTTTTTTTTTTTTTTT--------------------DDDDDDDD
-TTTTTTTTTTTTTTTT-TT------------------DDDDDDDDDDDDD
+TTTTTTTTTTTTTTTTTTTTTT--------------------DDDDDDD2
+TTTTTTTTTTTTTTTT-TT------------------DDDDDDDDDDDD2
 TTTTTTTTTTTTTT-----------------DDDDDDDD-----------
 TTTTTTTTT-----------------DDDDDDDDD---------------
 TTTTTTT---------------DDDDDDDD--------------------
@@ -24,9 +24,9 @@ TTTTTTT---------------DDDDDDDD--------------------
 ---------DDDD------------------WWWWWW-------------
 ------DDDD-----------------WWWWWWWWWW-------------
 ----DDDD--------------WWWWWWWWWWWWWWW-------------
-DDDDD----------------WWWWWWWWWWWWWWWW-------------
-DDD-----------------WWWWWWWWWWWWWWWW--------------
-D------------------WWWWWWWWWWWWWWWW---------------
+1DDDD----------------WWWWWWWWWWWWWWWW-------------
+1DD-----------------WWWWWWWWWWWWWWWW--------------
+1------------------WWWWWWWWWWWWWWWW---------------
 ------------------WWWWWWWWWWWWWWWW----------------
 ------------------WWWWWWWWWWWWWW------------------
 ---------------------WWWWWWWWWW---------TTTTT-----
