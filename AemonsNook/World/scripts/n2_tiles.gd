@@ -14,7 +14,10 @@ var TALL = 1
 var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
 var tiles = []
 var waterTiles = []
+var pathTiles = []
 var peeps = []
+
+
 
 enum MAPSIDE { TOP, RIGHT, BOTTOM, LEFT }
 const GROW_ALL = "all"
@@ -135,16 +138,21 @@ func SetTileType(row, column, symbol):
 	match symbol:
 		'T':
 			tile.setType(enums.TILETYPE.TREE)
+			
 		'W':
 			tile.setType(enums.TILETYPE.WATER)
 			waterTiles.append(tile)
 		'D':
 			tile.setType(enums.TILETYPE.DIRT)
-			
+			pathTiles.append(tile)
 		'1':
 			tile.setType(enums.TILETYPE.DIRT)
 			tile.mapEdge = true
 			tile.mapEdgeId = 1
+		'2':
+			tile.setType(enums.TILETYPE.DIRT)
+			tile.mapEdge = true
+			tile.mapEdgeId = 2
 
 # ---- CLICKABLES ---- #
 func createClickablePos(x, y, type):

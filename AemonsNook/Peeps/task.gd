@@ -1,8 +1,31 @@
 extends Node
 
+var enums = preload("res://Global/globalEnums.gd")
+
 # Constructor:
-func _ready():
-	pass
+func init(args):
+	taskType = args[0]
+	match args[0]:# ARG 0 is always the task type
+		enums.TASK_TYPE.WALK:
+			targetTile = args[1]
+			targetSquare = args[2]
+			targetDirection = args[3]
+		enums.TASK_TYPE.SEEK_FOOD:
+			pass
+		enums.TASK_TYPE.SEEK_REST:
+			pass
+		enums.TASK_TYPE.EXIT:
+			pass
+		enums.TASK_TYPE.SEEK_BRAWL:
+			pass
+		enums.TASK_TYPE.POOP:
+			pass
+		enums.TASK_TYPE.SEEK_TAVERN:
+			pass
+		enums.TASK_TYPE.SEEK_BATHROOM:
+			pass
+		enums.TASK_TYPE.SEEK_BLACKSMITH:
+			pass
 
 
 # Member variables:
@@ -24,10 +47,6 @@ func _process(delta):
 
 func cleanup():
 	emit_signal("taskComplete", self)
-	pass
-
-
-
 
 
 # Movement based, move to inherited class?

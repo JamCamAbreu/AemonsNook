@@ -1,11 +1,14 @@
 extends Node2D
 
 var enums = preload("res://Global/globalEnums.gd")
+var taskScript = preload("res://Peeps/task.gd")
+var tiles
 
 var enterEdgeId
 var exitEdgeId
 
-var myTasks
+var myTasks = []
+var currentTask
 
 var fatiguePoints  # number of tasks before tired and wants to leave
 
@@ -15,19 +18,26 @@ var age
 var role
 var sex
 
+# NOT YET IMPLEMENTED:
 var copper
 var silver
 var gold
 
+var moveSpeed
+var focus # how many tiles to walk before 'open' to new tasks
+
 
 func _ready():
+	tiles = get_node("/root/n2_world/n2_tiles")
 	get_node("Head").set_frame(randi() % get_node("Head").get_sprite_frames().get_frame_count("default"))
+	currentTask = myTasks[0]
 
 func _init(_role):
 	role = _role
 	SetSex(_role)
 	SetFirstName()
 	SetSurname(_role)
+	GenerateTasks(_role)
 
 
 func SetSex(_role):
@@ -103,5 +113,22 @@ func GetFame(_role):
 		enums.KING:
 			return 30
 
+
 func GenerateTasks(_role):
-	pass
+	# regardless of role, always generate some starting movement:
+	var targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
+	var t = NewWalkTask(targetTile)
+	myTasks.append(t)
+	
+
+
+func NewWalkTask(tile):
+	var args = []
+	args.append(enums.TASK_TYPE.WALK)
+	args.append(tile)
+	args.append(enums.TILE_SQUARE.TOP_LEFT)
+	args.append(enums.DIRECTION.UP)
+	return taskScript.new(args)
+	
+
+
