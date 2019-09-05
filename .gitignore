@@ -259,3 +259,12 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+
+# Godot Specific
+AemonsNook/.import/
+AemonsNook/export.cfg
+AemonsNook/export_presets.cfg
+
+# Art Assets
+Art/
