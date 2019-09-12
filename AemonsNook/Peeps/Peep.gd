@@ -4,13 +4,15 @@ var enums = preload("res://Global/globalEnums.gd")
 var taskScript = preload("res://Peeps/task.gd")
 var tiles
 
+var ready = false
+
 var enterEdgeId
 var exitEdgeId
 
 var myTasks = []
 var currentTask
 
-var fatiguePoints  # number of tasks before tired and wants to leave
+var fatiguePoints  # tasks cost fatigue points; points before tired and wants to leave
 
 var firstName
 var Surname
@@ -27,19 +29,69 @@ var moveSpeed
 var focus # how many tiles to walk before 'open' to new tasks
 
 
-func _ready():
-	tiles = get_node("/root/n2_world/n2_tiles")
-	get_node("Head").set_frame(randi() % get_node("Head").get_sprite_frames().get_frame_count("default"))
-	currentTask = myTasks[0]
+func _process(delta):
+	if (ready):
+		pass
 
-func _init(_role):
+
+
+# -- Tasks --
+func Move():
+	pass
+	
+func AskNextTile():
+	pass
+	
+func CheckDestinationReached():
+	pass
+
+func CheckInterrupt():
+	pass
+	
+func NextTask():
+	pass
+
+func GetCurTile():
+	pass
+
+
+
+# -- Setup and Constructor --
+func init(_role, enterEdge, _tiles):	# role = PEEP_TYPE
 	role = _role
 	SetSex(_role)
 	SetFirstName()
 	SetSurname(_role)
-	GenerateTasks(_role)
+	enterEdgeId = enterEdge
+	set_position(enterEdgeId.getPos())
+	tiles = _tiles
 
 
+func GenerateTasks(_role):
+	# regardless of role, always generate some starting movement:
+	var targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
+	var t = NewWalkTask(targetTile)
+	get_node("/root/n2_world/DebugMenu").numTasks += 1
+	myTasks.append(t)
+	
+func _ready():
+	tiles = get_node("/root/n2_world/n2_tiles")
+	get_node("Head").set_frame(randi() % get_node("Head").get_sprite_frames().get_frame_count("default"))
+	GenerateTasks(role)
+	#currentTask = myTasks[0]
+	ready = true
+
+func NewWalkTask(tile):
+	var args = []
+	args.append(enums.TASK_TYPE.WALK)
+	args.append(tile)
+	args.append(enums.TILE_SQUARE.TOPLEFT)
+	args.append(enums.DIRECTION.UP)
+	return taskScript.new(args)
+
+
+
+# -- Characteristics --
 func SetSex(_role):
 	# A few roles are sex-specific:
 	if (_role == enums.PEEP_TYPE.LADY || 
@@ -57,78 +109,60 @@ func SetSex(_role):
 
 func SetFirstName():
 	if (sex == enums.SEX.MALE):
-		firstName = enums.GetEnumName(enums.PEEP_MALE_FNAMES)
+		firstName = enums.GetNameRandom(enums.PEEP_MALE_FNAMES)
 	else:
-		firstName = enums.GetEnumName(enums.PEEP_FEMALE_FNAMES)
+		firstName = enums.GetNameRandom(enums.PEEP_FEMALE_FNAMES)
 
 func SetSurname(_role):
 	var fame = GetFame(_role)
 	
 	# COMMONER:
 	if (fame <= 10):
-		Surname = enums.GetEnumName(enums.SIRNAMES_COMMON)
+		Surname = enums.GetNameRandom(enums.SIRNAMES_COMMON)
 
 	# MIDDLE CLASS:
 	elif (fame <= 20):
-		Surname = enums.GetEnumName(enums.SIRNAMES_MIDDLE)
+		Surname = enums.GetNameRandom(enums.SIRNAMES_MIDDLE)
 
 	# ROYAL:
 	else:
-		Surname = enums.GetEnumName(enums.SIRNAMES_ROYAL)
+		Surname = enums.GetNameRandom(enums.SIRNAMES_ROYAL)
 
 func GetFame(_role):
 	match _role:
-		enums.HOMELESS:
+		enums.PEEP_TYPE.HOMELESS:
 			return 1
-		enums.THIEF:
+		enums.PEEP_TYPE.THIEF:
 			return 1
-		enums.FARMER:
+		enums.PEEP_TYPE.FARMER:
 			return 3
-		enums.TRADER:
+		enums.PEEP_TYPE.TRADER:
 			return 5
-		enums.MONK:
+		enums.PEEP_TYPE.MONK:
 			return 6
-		enums.NUN:
+		enums.PEEP_TYPE.NUN:
 			return 6
-		enums.FOREIGNER:
+		enums.PEEP_TYPE.FOREIGNER:
 			return 7
-		enums.ELDER:
+		enums.PEEP_TYPE.ELDER:
 			return 7
-		enums.PRIEST:
+		enums.PEEP_TYPE.PRIEST:
 			return 9
-		enums.KNIGHT:
+		enums.PEEP_TYPE.KNIGHT:
 			return 12
-		enums.WITCH:
+		enums.PEEP_TYPE.WITCH:
 			return 12
-		enums.BARD:
+		enums.PEEP_TYPE.BARD:
 			return 13
-		enums.QUESTER:
+		enums.PEEP_TYPE.QUESTER:
 			return 14
-		enums.WIZARD:
+		enums.PEEP_TYPE.WIZARD:
 			return 16
-		enums.BISHOP:
+		enums.PEEP_TYPE.BISHOP:
 			return 20
-		enums.LADY:
+		enums.PEEP_TYPE.LADY:
 			return 25
-		enums.KING:
+		enums.PEEP_TYPE.KING:
 			return 30
-
-
-func GenerateTasks(_role):
-	# regardless of role, always generate some starting movement:
-	var targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
-	var t = NewWalkTask(targetTile)
-	myTasks.append(t)
-	
-
-
-func NewWalkTask(tile):
-	var args = []
-	args.append(enums.TASK_TYPE.WALK)
-	args.append(tile)
-	args.append(enums.TILE_SQUARE.TOP_LEFT)
-	args.append(enums.DIRECTION.UP)
-	return taskScript.new(args)
-	
-
-
+		_:
+			return -1

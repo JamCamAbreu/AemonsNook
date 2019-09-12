@@ -3,7 +3,7 @@ extends Node
 var enums = preload("res://Global/globalEnums.gd")
 
 # Constructor:
-func init(args):
+func _init(args):
 	taskType = args[0]
 	match args[0]:# ARG 0 is always the task type
 		enums.TASK_TYPE.WALK:

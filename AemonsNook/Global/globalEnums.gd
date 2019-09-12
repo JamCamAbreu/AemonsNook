@@ -22,7 +22,7 @@ enum MOUSE_STATE { NONE, INSIDE, OUTSIDE }
 
 enum PEEP_TYPE { HOMELESS, THIEF, FARMER, TRADER, KNIGHT, BARD, 
                  LORD, LADY, QUESTER, WIZARD, KING, MONK, WITCH,
-                 NUN, FOREIGNER, ELDER }
+                 NUN, FOREIGNER, ELDER, PRIEST, BISHOP }
 
 enum SEX { MALE, FEMALE }
 
@@ -30,8 +30,7 @@ enum TASK_TYPE { WALK, SEEK_FOOD, SEEK_REST, EXIT, SEEK_BRAWL, POOP, SEEK_TAVERN
                  SEEK_BATHROOM, SEEK_BLACKSMITH}
 
 
-
-func GetEnumName(whichEnum):
+static func GetNameRandom(whichEnum):
 	var index = randi() % whichEnum.size()
 	return whichEnum[index]
 

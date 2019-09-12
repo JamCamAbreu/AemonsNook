@@ -9,6 +9,12 @@ var stoneCounter
 
 var topAnimation = "none"
 
+var tileAbove
+var tileRight
+var tileBelow
+var tileLeft
+
+
 # Peeps
 var mapEdge = false
 var mapEdgeId = -1
@@ -25,6 +31,16 @@ func _ready():
 	stoneCounter = get_node(paths.stoneCounter)
 	tileset_id = 0 # default
 	isBuildZone = false
+
+
+
+func getPos():
+	return position
+
+
+
+
+
 
 
 func CreateBuildUI():

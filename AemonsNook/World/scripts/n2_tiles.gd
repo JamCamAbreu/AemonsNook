@@ -15,6 +15,7 @@ var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
 var tiles = []
 var waterTiles = []
 var pathTiles = []
+var edgeTiles = []
 var peeps = []
 
 
@@ -46,6 +47,7 @@ func _enter_tree():
 func _ready():
 	
 	_generateTiles(enums.TILETYPE.GRASS)
+	_setTileCardinals()
 	BuildWorldFromAscii(level.GetAscii())
 	
 	setSprites()
@@ -53,20 +55,13 @@ func _ready():
 	
 	setBuildZoneTiles()
 	
-	createPeepRandom(30)
-	
-	
-	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
-	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
-	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
-	#_growType(enums.TILETYPE.WATER, 7, "ponds", 1)
-	
-	#_seedRandom(enums.TILETYPE.TREE, 3, "trees1")
-	#_growType(enums.TILETYPE.TREE, 10, "trees1", 1)
-	
-	
+
+
+
+
+
 func _process(delta):
-	#ProcessAnimations()
+	ProcessAnimations()
 	pass
 
 
@@ -101,23 +96,34 @@ func createWaterParticle():
 		var randomIndex = randi() % waterTiles.size()
 		var curTile = waterTiles[randomIndex]
 		curTile.createWaterSparkle()
-			
-	
+
+
 
 # ---- TILES ---- #
 func _generateTiles(type):
 	var t = load("res://World/sc_tile.tscn")
-	var rows = TALL
-	var cols = WIDE
-	for r in range(rows):
+	for r in range(TALL):
 		tiles.append([])
 		tiles[r].resize(WIDE)
-		for c in range(cols):
+		for c in range(WIDE):
 			var newTile = t.instance()
 			newTile.setType(type)
 			newTile.translate(Vector2(c * TILE_SIZE_PIXELS, r * TILE_SIZE_PIXELS))
 			add_child(newTile)
 			tiles[r][c] = newTile
+
+func _setTileCardinals():
+	for r in range(TALL):
+		for c in range(WIDE):
+			var curTile = tiles[r][c]
+			if (r > 0):
+				curTile.tileAbove = tiles[r - 1][c]
+			if (r < (TALL - 1)):
+				curTile.tileBelow = tiles[r + 1][c]
+			if (c > 0):
+				curTile.tileLeft = tiles[r][c - 1]
+			if (c < (WIDE - 1)):
+				curTile.tileRight = tiles[r][c + 1]
 
 
 
@@ -149,10 +155,12 @@ func SetTileType(row, column, symbol):
 			tile.setType(enums.TILETYPE.DIRT)
 			tile.mapEdge = true
 			tile.mapEdgeId = 1
+			edgeTiles.append(tile)
 		'2':
 			tile.setType(enums.TILETYPE.DIRT)
 			tile.mapEdge = true
 			tile.mapEdgeId = 2
+			edgeTiles.append(tile)
 
 # ---- CLICKABLES ---- #
 func createClickablePos(x, y, type):
@@ -301,6 +309,18 @@ func isBuildZoneType(tileShape):
 
 
 # ---- TILES: MAP SEEDING SYSTEM ---- #
+
+# Typical Usage:
+	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
+	#_growType(enums.TILETYPE.WATER, 5, "ponds", 1)
+	#_seedRandom(enums.TILETYPE.WATER, 1, "ponds")
+	#_growType(enums.TILETYPE.WATER, 7, "ponds", 1)
+	
+	#_seedRandom(enums.TILETYPE.TREE, 3, "trees1")
+	#_growType(enums.TILETYPE.TREE, 10, "trees1", 1)
+
+
+# Methods:
 func _seedPos(x, y, _seedID, type):
 	tiles[y][x].setType(type)
 	tiles[y][x].seedID = _seedID

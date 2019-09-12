@@ -12,6 +12,7 @@ var mapHeight = 20 # just starting value
 
 var m_position
 
+var edgeScrollEnabled = false
 
 # Handles scrolling:d
 # -1 = zoom out
@@ -42,16 +43,16 @@ func _input(e):
 #Responsible for the camera movement
 func camMove(delta):
 	if m_position != null:
-		if Input.is_action_pressed("cam_up") || m_position.y <= panBorderThickness:
+		if Input.is_action_pressed("cam_up") || (m_position.y <= panBorderThickness && edgeScrollEnabled):
 			self.position.y -= panSpeed * delta * (1 + self.zoom.y)
 			
-		if Input.is_action_pressed("cam_right") || m_position.x >= get_viewport().size.x - panBorderThickness:
+		if Input.is_action_pressed("cam_right") || (m_position.x >= get_viewport().size.x - panBorderThickness && edgeScrollEnabled):
 			self.position.x += panSpeed * delta * (1 + self.zoom.x)
 			
-		if Input.is_action_pressed("cam_down")  || m_position.y >= get_viewport().size.y - panBorderThickness:
+		if Input.is_action_pressed("cam_down")  || (m_position.y >= get_viewport().size.y - panBorderThickness && edgeScrollEnabled):
 			self.position.y += panSpeed * delta * (1 + self.zoom.y)
 			
-		if Input.is_action_pressed("cam_left") || m_position.x <= panBorderThickness:
+		if Input.is_action_pressed("cam_left") || (m_position.x <= panBorderThickness && edgeScrollEnabled):
 			self.position.x -= panSpeed * delta * (1 + self.zoom.x)
 		
 		if m_scrolling != 0:

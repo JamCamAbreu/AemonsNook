@@ -185,6 +185,7 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 130, 0 )
 
 [node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row2/mode"]
+editor/display_folded = true
 margin_right = 130.0
 margin_bottom = 40.0
 region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
@@ -206,6 +207,7 @@ text = "12"
 valign = 1
 
 [node name="mouseState" type="MarginContainer" parent="MarginContainer/rows/row2"]
+editor/display_folded = true
 margin_left = 134.0
 margin_right = 264.0
 margin_bottom = 40.0
@@ -226,6 +228,34 @@ align = 2
 valign = 1
 
 [node name="value" type="Label" parent="MarginContainer/rows/row2/mouseState/Rect"]
+margin_left = 50.0
+margin_right = 130.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
+text = "12"
+valign = 1
+
+[node name="numTasks" type="MarginContainer" parent="MarginContainer/rows/row2"]
+margin_left = 268.0
+margin_right = 398.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="Rect" type="NinePatchRect" parent="MarginContainer/rows/row2/numTasks"]
+margin_right = 130.0
+margin_bottom = 40.0
+region_rect = Rect2( 14.4444, 8.88889, 0.444443, 0 )
+
+[node name="label" type="Label" parent="MarginContainer/rows/row2/numTasks/Rect"]
+margin_right = 45.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 45, 0 )
+text = "Num
+Tasks"
+align = 2
+valign = 1
+
+[node name="value" type="Label" parent="MarginContainer/rows/row2/numTasks/Rect"]
 margin_left = 50.0
 margin_right = 130.0
 margin_bottom = 40.0
