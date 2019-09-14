@@ -26,7 +26,12 @@ func _ready():
 	self.add_child(peepGenerator)
 	peepGenerator.Setup(level, tilesid)
 
-
+	var tilesNode = get_node("n2_tiles")
+	if (tilesNode != null && tilesNode.setupComplete == true):
+		var centerX = tilesNode.WIDE/2
+		var centerY = tilesNode.TALL/2
+		var centerTile = tilesNode.tiles[centerY][centerX]
+		get_node("playerView").position = centerTile.getPos()
 
 
 

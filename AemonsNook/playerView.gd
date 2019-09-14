@@ -26,6 +26,10 @@ func _ready():
 	mapWidth = tiles.GetMapWidth()
 	mapHeight = tiles.GetMapHeight()
 	
+	self.zoom.x = 1.5
+	self.zoom.y = 1.5
+	
+	
 func _process(delta):
 	camMove(delta)
 

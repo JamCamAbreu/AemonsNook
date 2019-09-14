@@ -6,13 +6,15 @@ const globalMethods = preload("res://Global/globalMethods.gd")
 
 var level
 
+var setupComplete = false
+
 var animationTimerMax = 60
 var animationTimer = animationTimerMax
 
 var WIDE = 1
 var TALL = 1
 var TILE_SIZE_PIXELS = enums.TILE_SIZE_PIXELS
-var tiles = []
+var tiles = [[]]
 var waterTiles = []
 var pathTiles = []
 var edgeTiles = []
@@ -37,7 +39,7 @@ func GetMapHeight():
 
 func _enter_tree():
 	# Get this from a menu or something later:
-	var levelString = "res://Levels/Level03.gd"
+	var levelString = "res://Levels/Level04.gd"
 	var levelScript = load(levelString)
 	level = levelScript.new()
 	WIDE = level.WIDTH
@@ -55,6 +57,7 @@ func _ready():
 	
 	setBuildZoneTiles()
 	
+	setupComplete = true
 
 
 
@@ -160,6 +163,16 @@ func SetTileType(row, column, symbol):
 			tile.setType(enums.TILETYPE.DIRT)
 			tile.mapEdge = true
 			tile.mapEdgeId = 2
+			edgeTiles.append(tile)
+		'3':
+			tile.setType(enums.TILETYPE.DIRT)
+			tile.mapEdge = true
+			tile.mapEdgeId = 3
+			edgeTiles.append(tile)
+		'4':
+			tile.setType(enums.TILETYPE.DIRT)
+			tile.mapEdge = true
+			tile.mapEdgeId = 4
 			edgeTiles.append(tile)
 
 # ---- CLICKABLES ---- #

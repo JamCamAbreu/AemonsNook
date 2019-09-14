@@ -1,0 +1,52 @@
+extends Node
+
+const WIDTH = 50
+const HEIGHT = 35
+
+func GetAscii():
+	var output = String(ascii)
+	output = output.replace(" ", "")
+	output = output.replace("\n", "")
+	return output
+
+const ascii = """
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-T-T-TTT-TTTTTTTTTT
+TTTTTTTT-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-TTTTTTTTTT
+TT-TTTTTTTT----------------TTTTTT-----TTTTTTTTTTTT
+TTTTTTTTTT----------------------------TTTTTTTTTTTT
+TTTTTTTT-----------DDDDDDDDDDD-------------TTTTTTT
+TTTTTTTT--------DDDDDDDDDDDDDDDDDDDDDD---------TT-
+TTTTTT-T------DDDDD--------DDDDDDDDDDDDDD---------
+TTTTTTTT-----DDD-----T---------------DDDDDDD------
+TTTTTT-----DDDD----TTTTT----------------DDDDDDD---
+----------DDDD----TT-T-T-----TTT-TT---------DDDDD2
+-------DDDDD-----TTTTT-T------TTTTTTT--------DDDD2
+-----DDDDD-------TTTTT-T--------TTTTTTT-----DDDDD2
+----DDDDDDDD----TTTTTT-TT--DDDD---TTTTT----DD-----
+-DDDDD-----DD--T-TTTTT-TT-----DD---TT-----DD------
+1DDD--------DD-T-TTTTTT-TT-----DD-------DDD-------
+1DD----------DDTTTTTTT-TTTT-----DD----DDD---------
+----------T-TTDDTTTTTTTT---------DD-DDD-----------
+--------T-TTTTTDTT--T--T---------DDDD-----------T-
+-------TTTTT-T-DDTTTTTTTTT-------DD-----------TTTT
+----TTTT-TTTTTTTD-----TTTTTT-----DD---------TTTTTT
+---TTTTTTTTTTTT-D--------TTT--DDDDDD-------TTTTTTT
+-------TTTTT----DDDDDDD------DD----DDD--TTTTTTTTTT
+--------TTT----DD-----DDDDDDDD----TTDDDTTTTTTTTTTT
+-------TTT----DD---T------------TTTTTTDDDTTTTTTT-T
+4DD----TTT---DD---TT--TTTTTTTTTTTTT-T-TDDDTTTTTTTT
+--DDD---TT---D----TTTTTTTTTTT-TT--T-TTTTTDDDTT-TTT
+----DDDDD----D--TTTTTTT-TTTWWTTTT-TTTTTT-TTDDTTT--
+--------DDDDDD--TTTT-TTTTWWWWWW-T-TTTTTTTTTDDD----
+--TTTT----------TTTTTTTWWWWT-TTTTTT--T--TT--DD----
+-TTTT---------TTTTTTTTWWT-TTTTT-TTTTTTTTT---DD----
+TTTT-WWWWWWWTTT-TT-TTT-T-TT-TTTTT-----------DD----
+TTT-TTTTWWWWTWWTTTTT--TTTTTTTT------------DDDD----
+TTTTTTTWWWWWWWWTTTTTTTTT-TTT--------------DD------
+TTTTTTTTWWTTTTTTTTTTTTTTTTT---------------333-----
+"""
+
+
+

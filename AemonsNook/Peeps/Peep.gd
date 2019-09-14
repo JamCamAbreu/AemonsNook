@@ -1,7 +1,9 @@
 extends Node2D
 
 var enums = preload("res://Global/globalEnums.gd")
-var taskScript = preload("res://Peeps/task.gd")
+var globalMethods = preload("res://Global/globalMethods.gd")
+var taskScript
+
 var tiles
 
 var ready = false
@@ -9,8 +11,14 @@ var ready = false
 var enterEdgeId
 var exitEdgeId
 
+const WAIT_TIME = 1
+var curWaitTime = 0
+
 var myTasks = []
 var currentTask
+var curTile
+var nextTile
+var targetTile
 
 var fatiguePoints  # tasks cost fatigue points; points before tired and wants to leave
 
@@ -29,21 +37,10 @@ var moveSpeed
 var focus # how many tiles to walk before 'open' to new tasks
 
 
-func _process(delta):
-	if (ready):
-		pass
 
 
 
-# -- Tasks --
-func Move():
-	pass
-	
-func AskNextTile():
-	pass
-	
-func CheckDestinationReached():
-	pass
+# -- Tasks --	
 
 func CheckInterrupt():
 	pass
@@ -51,8 +48,6 @@ func CheckInterrupt():
 func NextTask():
 	pass
 
-func GetCurTile():
-	pass
 
 
 
@@ -63,6 +58,8 @@ func init(_role, enterEdge, _tiles):	# role = PEEP_TYPE
 	SetFirstName()
 	SetSurname(_role)
 	enterEdgeId = enterEdge
+	curTile = enterEdge
+	nextTile = null
 	set_position(enterEdgeId.getPos())
 	tiles = _tiles
 
@@ -70,16 +67,79 @@ func init(_role, enterEdge, _tiles):	# role = PEEP_TYPE
 func GenerateTasks(_role):
 	# regardless of role, always generate some starting movement:
 	var targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
+	while (targetTile == curTile):
+		targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
 	var t = NewWalkTask(targetTile)
+	
+	
 	get_node("/root/n2_world/DebugMenu").numTasks += 1
 	myTasks.append(t)
-	
+
+
 func _ready():
+	taskScript = load("res://Peeps/task.gd")
 	tiles = get_node("/root/n2_world/n2_tiles")
 	get_node("Head").set_frame(randi() % get_node("Head").get_sprite_frames().get_frame_count("default"))
 	GenerateTasks(role)
-	#currentTask = myTasks[0]
+	currentTask = myTasks[0]
 	ready = true
+
+
+
+
+func _process(delta):
+	if (ready):
+		
+		curWaitTime += 1
+		
+		if (curWaitTime > WAIT_TIME && currentTask != null && currentTask.taskType == enums.TASK_TYPE.WALK):
+			curWaitTime = 0
+			var result = Walk()
+			if (result == true):
+				currentTask = null # TODO, get next task or go home
+				myTasks.remove(0)
+
+		if (currentTask == null):
+			if (myTasks.size() == 0):
+				
+				# new walk task
+				var targetTile = tiles.pathTiles[randi() % tiles.pathTiles.size()]
+				GenerateTasks(role)
+				
+			else:
+				currentTask = myTasks[0]
+
+
+
+
+
+
+
+
+const CLOSING_GAP = 3
+func Walk():
+
+	if (nextTile == null || curTile == nextTile):
+		if (currentTask.generatedPath.size() > 0):
+			nextTile = currentTask.GetNextTileFromQueue()
+			nextTile.DebugSetNextPathImage()
+		else:
+			return true # true means we are finished with task
+
+	var moveToPos = nextTile.getPos()
+	if (position.distance_to(moveToPos) <= CLOSING_GAP):
+		position = moveToPos
+		curTile.DebugClearPathImage()
+		curTile = nextTile
+		return false # true means we are finished with task
+		
+	else:
+		var newX = globalMethods.Ease(get_position().x, moveToPos.x, 0.1)
+		var newY = globalMethods.Ease(get_position().y, moveToPos.y, 0.1)	
+		set_position(Vector2(newX, newY))
+		#get_node("/root/n2_world/playerView").set_position(position)
+		return false # false means keep walking
+
 
 func NewWalkTask(tile):
 	var args = []
@@ -87,6 +147,8 @@ func NewWalkTask(tile):
 	args.append(tile)
 	args.append(enums.TILE_SQUARE.TOPLEFT)
 	args.append(enums.DIRECTION.UP)
+	args.append(curTile)
+	args.append(tiles.pathTiles)
 	return taskScript.new(args)
 
 

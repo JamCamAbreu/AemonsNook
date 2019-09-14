@@ -106,6 +106,19 @@ func setType(_type):
 	type = _type
 	_setTexture(_type)
 	
+func DebugSetCurPathImage(isTarget):
+	get_node("topLayer").set_animation("hover")
+	if (isTarget):
+		get_node("topLayer").set_frame(0)
+	else:
+		get_node("topLayer").set_frame(1)
+
+func DebugClearPathImage():
+	get_node("topLayer").set_animation("none")
+
+func DebugSetNextPathImage():
+	get_node("topLayer").set_animation("hover")
+	get_node("topLayer").set_frame(2)
 
 func setSprite(spriteId):
 	#var label = get_node("debugLabel")

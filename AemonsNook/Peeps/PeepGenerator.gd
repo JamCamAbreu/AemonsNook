@@ -8,9 +8,15 @@ var entrances = []
 var ready = false
 var tilesNode
 
-var peeps = []
+var spawnSpeedMin = 60*1 # get from map
+var spawnSpeedMax = 60*5 # get from map
+var curSpawnSpeed = (randi() % (spawnSpeedMax - spawnSpeedMin)) + spawnSpeedMin
+var timer = 0
 
-var done = false
+var startingMaxPeeps = 10 # get from map
+var maxPeeps = startingMaxPeeps
+
+var peeps = []
 
 # called by sc_world
 func Setup(levelNode, tilesNodeid):
@@ -31,13 +37,18 @@ func _ready():
 	pass
 
 func _process(delta):
-	if (ready and !done):
+	if (ready):
+		timer += 1
+		
 		var type
-		for i in range(10):
+		if (timer > curSpawnSpeed && peeps.size() < maxPeeps):
 			type = randi() % enums.PEEP_TYPE.size()
 			createPeepEntrance(type)
-		done = true
+			resetPeepTimer()
 
+func resetPeepTimer():
+	curSpawnSpeed = (randi() % (spawnSpeedMax - spawnSpeedMin)) + spawnSpeedMin
+	timer = 0
 
 
 func createPeepEntrance(_type):
