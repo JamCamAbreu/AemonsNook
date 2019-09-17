@@ -26,6 +26,9 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 			for s in get_tree().get_nodes_in_group("Selectors"):
 				s.queue_free()
 
+func SetImage(frame):
+	get_node("backdrop").set_frame(frame)
+
 
 
 

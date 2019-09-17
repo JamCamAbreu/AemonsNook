@@ -27,7 +27,6 @@ globalPaths="*res://Global/globalPaths.gd"
 [display]
 
 window/size/height=768
-window/stretch/mode="viewport"
 
 [input]
 

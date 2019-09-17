@@ -64,6 +64,7 @@ func CreateBuildUI():
 		if (i + 1 <= maxNodes):
 			var cur = bs.instance()
 			var pos = deg2rad(centerAngle - (spread/2) + (spaceAmount*i))
+			cur.SetImage(randi() % 15)
 			cur.target = Vector2(cos(pos)*radius, sin(pos)*radius)
 			cur.ready = true
 			add_child(cur)
