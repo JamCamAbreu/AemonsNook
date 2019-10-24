@@ -1,5 +1,7 @@
 extends Node
 
+var enums = preload("res://Global/globalEnums.gd")
+
 const WIDTH = 50
 const HEIGHT = 35
 
@@ -8,6 +10,11 @@ func GetAscii():
 	output = output.replace(" ", "")
 	output = output.replace("\n", "")
 	return output
+
+
+var researchStart = [enums.RESEARCH.BUILD_BOOTH_PRODUCE, enums.RESEARCH.BUILD_BLACKSMITH]
+var researchNext = [enums.RESEARCH.BUILD_TAVERN, enums.RESEARCH.BUILD_BATH]
+
 
 const ascii = """
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT

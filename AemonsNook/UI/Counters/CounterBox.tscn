@@ -5,7 +5,7 @@
 [ext_resource path="res://Resources/Textures/spr_tree.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 28
+size = 23
 extra_spacing_bottom = -18
 font_data = ExtResource( 2 )
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/Counters/CounterBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/Textures/Trees/Tree6.png" type="Texture" id=2]
 
 [node name="WoodCounter" instance=ExtResource( 1 )]
 
@@ -11,3 +12,8 @@ margin_right = -12.0
 margin_bottom = -2.0
 text = "10"
 valign = 0
+
+[node name="Sprite" parent="counterBg" index="1"]
+position = Vector2( 25.235, 17.9831 )
+scale = Vector2( 1.4097, 1.40394 )
+texture = ExtResource( 2 )
