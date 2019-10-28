@@ -11,7 +11,7 @@ func GetAscii():
 	output = output.replace("\n", "")
 	return output
 
-var buildingsStart = [enums.BUILDING_TYPE.BOOTH_PRODUCE, enums.BUILDING_TYPE.BLACKSMITH]
+var buildingsStart = [enums.BUILDING_TYPE.BOOTH_PRODUCE, enums.BUILDING_TYPE.BLACKSMITH, enums.BUILDING_TYPE.ROAD]
 var researchStart = [enums.RESEARCH.BUILD_BOOTH_PRODUCE, enums.RESEARCH.BUILD_BLACKSMITH]
 var researchNext = [enums.RESEARCH.BUILD_TAVERN, enums.RESEARCH.BUILD_BATH]
 

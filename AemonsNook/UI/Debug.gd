@@ -40,6 +40,10 @@ func ModeToString(mode):
 			return "NORMAL"
 		enums.MODE.BUILD:
 			return "BUILD"
+		enums.MODE.BUILD_ROAD:
+			return "ROAD"
+		enums.MODE.PLACEMENT:
+			return "PLACEMENT"
 
 func MSToString(ms):
 	match ms:

@@ -84,6 +84,7 @@ func CreateBuildUI():
 func clickable_clicked_received(obj):
 	harvestClickable(obj)
 
+
 func _setTexture(type):
 	match (type):
 		enums.TILETYPE.GRASS:
@@ -362,5 +363,5 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	var worldNode = get_node(paths.worldNode)
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			if (isBuildZone && (worldNode.mode != enums.MODE.BUILD)):
+			if (isBuildZone && (worldNode.mode == enums.MODE.BUILD_ROAD)):
 				CreateBuildUI()

@@ -23,13 +23,34 @@ func _process(delta):
 			set_position(target)
 			arrived = true
 
+
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			ClearSelections()
 			SetModes()
+			BuildAction()
 
 
+func BuildAction():
+	if (buildingType != null):
+		
+		if (buildingType == enums.BUILDING_TYPE.ROAD):
+			get_node("/root/n2_world").mode = enums.MODE.BUILD_ROAD
+		else:
+			BeginPlacement(buildingType)
+
+
+
+func BeginPlacement(type):
+	var worldNode = get_node("/root/n2_world")
+	worldNode.mode = enums.MODE.PLACEMENT
+	
+	var menuResource = load("res://UI/Build/BuildPlacement.tscn")
+	var m = menuResource.instance()
+	m.CreatePlacement(type)
+	worldNode.menu = m
+	worldNode.add_child(m)
 
 
 
@@ -77,6 +98,8 @@ func SetBuildingType(type):
 			get_node("backdrop").set_frame(1)
 		enums.BUILDING_TYPE.CLOTH:
 			get_node("backdrop").set_frame(5)
+		enums.BUILDING_TYPE.ROAD:
+			get_node("backdrop").set_frame(15)
 
 
 func _on_Area2D_mouse_entered():

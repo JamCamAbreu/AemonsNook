@@ -20,7 +20,6 @@ func _ready():
 func _process(delta):
 	MoveWithMouse()
 	CheckValiditySquares()
-	pass
 
 
 func CreatePlacement(buildingType):

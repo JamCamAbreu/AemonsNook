@@ -60,7 +60,7 @@ func _ready():
 
 
 func _input(event):
-	#CheckDeselect(event)
+	CheckDeselect(event)
 	CheckRightButton(event)
 	
 
@@ -78,12 +78,13 @@ func _input(event):
 # OLD:
 func CheckDeselect(mouseEvent):
 	if (mouseEvent is InputEventMouseButton) and mouseEvent.pressed:
-		
 		if (mode == enums.MODE.BUILD && mouseState == enums.MOUSE_STATE.OUTSIDE):
 			for s in get_tree().get_nodes_in_group("Selectors"):
 				s.queue_free()
 			mode = enums.MODE.NORMAL
 			mouseState = enums.MOUSE_STATE.NONE
+			remove_child(menu)
+			menu = null
 
 
 
@@ -102,6 +103,8 @@ func CheckRightButton(mouseEvent):
 		else:
 			remove_child(menu)
 			menu = null
+			mode = enums.MODE.NORMAL
+			mouseState = enums.MOUSE_STATE.NONE
 
 
 
