@@ -38,6 +38,11 @@ func getPos():
 	return position
 
 
+func IsBuildable():
+	if (type == enums.TILETYPE.GRASS):
+		return true
+	else:
+		return false
 
 
 
@@ -101,11 +106,21 @@ func _setTexture(type):
 			get_node("middleLayer").set_animation("dirt")
 			get_node("topLayer").set_animation("none")
 			topAnimation = "none"
+		enums.TILETYPE.STONE:
+			get_node("bottomLayer").set_animation("none")
+			get_node("middleLayer").set_animation("grass")
+			get_node("topLayer").set_animation("none")
+			topAnimation = "none"
 			
 
 func setType(_type):
 	type = _type
 	_setTexture(_type)
+	
+	
+
+
+
 	
 func DebugSetCurPathImage(isTarget):
 	get_node("topLayer").set_animation("hover")
@@ -200,8 +215,82 @@ func growTrees(spriteId):
 				var randX = rand_range(-0.8, 0.8)
 				var randY = rand_range(-0.8, 0.8)
 				createClickablePos(enums.CLICK_TYPE.TREE, randX, randY) 
+
+
+
+
+func growStones(spriteId):
+	match spriteId:
+		
+		#  1 = all the way right/bottom
+		# -1 = all the way left/top
+		#  0 = in the middle
+		
+		# Single
+		0:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+			
+		# Horz Line
+		1, 8, 9:
+			for i in range(3):
+				var randX = rand_range(-0.8, 0.8)
+				var randY = rand_range(-0.3, 0.3)
+				createClickablePos(enums.CLICK_TYPE.STONE, randX, randY) 
+			
+		# Vert Line
+		2, 4, 6:
+			for i in range(3):
+				var randX = rand_range(-0.3, 0.3)
+				var randY = rand_range(-0.8, 0.8)
+				createClickablePos(enums.CLICK_TYPE.STONE, randX, randY) 
+			
+		# Up Left Corner
+		12:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+			
+		# Up Right Corner
+		5:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+		
+		# Down Right Corner
+		3:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+			
+		# Down Left Corner
+		10:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
 	
+		# Right T
+		7:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
 	
+		# Down T
+		11:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+	
+		# Left T
+		14:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+	
+		# Up T
+		13:
+			createClickablePos(enums.CLICK_TYPE.STONE, 0, 0) 
+	
+		# All sides (dense)
+		15:
+			var randNum = randi() % 2 + 1
+			for i in range(randNum):
+				var randX = rand_range(-0.8, 0.8)
+				var randY = rand_range(-0.8, 0.8)
+				createClickablePos(enums.CLICK_TYPE.STONE, randX, randY) 
+
+
+
+
+
+
+
+
 
 
 
@@ -220,12 +309,25 @@ func createClickablePos(type, xTranslation, yTranslation):
 	var t = load(globalPaths.clickableScene)
 	var newClickable = t.instance()
 	newClickable._setType(type)
-	var spriteNum = randi() % enums.NUM_TREE_SPRITES
+	
+	# SET SPRITE FRAME
+	var spriteNum
+	if (type == enums.CLICK_TYPE.TREE):
+		spriteNum = randi() % enums.NUM_TREE_SPRITES
+	elif (type == enums.CLICK_TYPE.STONE):
+		spriteNum = randi() % enums.NUM_STONE_SPRITES
 	newClickable.get_node("sprite").set_frame(spriteNum)
+	
+	# Move to position
 	newClickable.translate(Vector2(enums.TILE_SIZE_PIXELS/2 * xTranslation, enums.TILE_SIZE_PIXELS/2 * yTranslation))
+	
+	# Z index:
 	var index = int(get_position().y + ((yTranslation + 1)*2))
 	newClickable.set_z_index(index)
+	
+	# DEBUG:
 	#newClickable.setDebug(index)
+	
 	add_child(newClickable)
 	newClickable.connect("clicked", self, "clickable_clicked_received")
 

@@ -7,6 +7,7 @@ var target  # Vector2, set by parent
 var ready = false
 var arrived = false
 
+var buildingType
 
 
 
@@ -43,8 +44,40 @@ func SetModes():
 
 
 
-func SetImage(frame):
-	get_node("backdrop").set_frame(frame)
+func SetBuildingType(type):
+	buildingType = type
+	match (type):
+		enums.BUILDING_TYPE.ARCHERY:
+			get_node("backdrop").set_frame(0)
+		enums.BUILDING_TYPE.BLACKSMITH:
+			get_node("backdrop").set_frame(2)
+		enums.BUILDING_TYPE.TAVERN:
+			get_node("backdrop").set_frame(14)
+		enums.BUILDING_TYPE.BOOTH_PRODUCE:
+			get_node("backdrop").set_frame(8)
+		enums.BUILDING_TYPE.BOOTH_FISH:
+			get_node("backdrop").set_frame(10)
+		enums.BUILDING_TYPE.BOOTH_GEMS:
+			get_node("backdrop").set_frame(7)
+		enums.BUILDING_TYPE.BUTCHER:
+			get_node("backdrop").set_frame(3)
+		enums.BUILDING_TYPE.STABLES:
+			get_node("backdrop").set_frame(12)
+		enums.BUILDING_TYPE.TANNER:
+			get_node("backdrop").set_frame(13)
+		enums.BUILDING_TYPE.SCRIBE:
+			get_node("backdrop").set_frame(9)
+		enums.BUILDING_TYPE.CHAPEL:
+			get_node("backdrop").set_frame(4)
+		enums.BUILDING_TYPE.INN:
+			get_node("backdrop").set_frame(6)
+		enums.BUILDING_TYPE.BOOTH_SEEDS:
+			get_node("backdrop").set_frame(11)
+		enums.BUILDING_TYPE.BATH:
+			get_node("backdrop").set_frame(1)
+		enums.BUILDING_TYPE.CLOTH:
+			get_node("backdrop").set_frame(5)
+
 
 func _on_Area2D_mouse_entered():
 	get_node("/root/n2_world").mouseState = enums.MOUSE_STATE.INSIDE

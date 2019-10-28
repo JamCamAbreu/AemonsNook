@@ -1,23 +1,23 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://UI/Build/BuildSelection.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Textures/Buildings/Archery.png" type="Texture" id=2]
-[ext_resource path="res://Resources/Textures/Buildings/Bath.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Textures/Buildings/Blacksmith.png" type="Texture" id=4]
-[ext_resource path="res://Resources/Textures/Buildings/Butcher.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Textures/Buildings/Church.png" type="Texture" id=6]
-[ext_resource path="res://Resources/Textures/Buildings/Cloth.png" type="Texture" id=7]
-[ext_resource path="res://Resources/Textures/Buildings/Inn.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Textures/Buildings/Jeweler.png" type="Texture" id=9]
-[ext_resource path="res://Resources/Textures/Buildings/market.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Textures/Buildings/Scribe.png" type="Texture" id=11]
-[ext_resource path="res://Resources/Textures/Buildings/Seafood.png" type="Texture" id=12]
-[ext_resource path="res://Resources/Textures/Buildings/Seeds.png" type="Texture" id=13]
-[ext_resource path="res://Resources/Textures/Buildings/Stables.png" type="Texture" id=14]
-[ext_resource path="res://Resources/Textures/Buildings/Tanner.png" type="Texture" id=15]
-[ext_resource path="res://Resources/Textures/Buildings/Tavern.png" type="Texture" id=16]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Archery.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Bath.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Blacksmith.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Butcher.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Church.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Cloth.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Inn.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Jeweler.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/market.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Scribe.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Seafood.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Seeds.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Stables.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Tanner.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Textures/Buildings/Signs/Tavern.png" type="Texture" id=16]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
 [sub_resource type="SpriteFrames" id=2]
@@ -36,7 +36,7 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.75, 0.75 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="backdrop" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )

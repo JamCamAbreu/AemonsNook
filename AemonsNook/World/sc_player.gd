@@ -9,8 +9,16 @@ var stone
 var food
 
 var researchUnlocked = []
+var buildingsUnlocked = []
 
 func AddResearch(type):
 	researchUnlocked.append(type)
 
+func AddBuilding(type):
+	buildingsUnlocked.append(type)
 
+func GetResearchUnlocked():
+	return researchUnlocked
+	
+func GetBuildingsUnlocked():
+	return buildingsUnlocked

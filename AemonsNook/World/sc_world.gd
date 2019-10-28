@@ -12,6 +12,7 @@ var peepGenerator
 
 var curLevel
 
+var menu
 
 func _init():
 		# update this process both here and in n2_tiles
@@ -24,6 +25,10 @@ func _init():
 	var research = curLevel.researchStart
 	for r in research:
 		player.AddResearch(r)
+		
+	var buildingsUnlocked = curLevel.buildingsStart
+	for b in buildingsUnlocked:
+		player.AddBuilding(b)
 
 
 # Eventually, I should get peep generator info while loading up the level.
@@ -51,16 +56,72 @@ func _ready():
 
 
 
+
+
+
 func _input(event):
-	Deselect(event)
+	#CheckDeselect(event)
+	CheckRightButton(event)
+	
 
 
-func Deselect(mouseEvent):
+
+
+
+
+
+
+
+
+
+
+# OLD:
+func CheckDeselect(mouseEvent):
 	if (mouseEvent is InputEventMouseButton) and mouseEvent.pressed:
+		
 		if (mode == enums.MODE.BUILD && mouseState == enums.MOUSE_STATE.OUTSIDE):
-				for s in get_tree().get_nodes_in_group("Selectors"):
-					s.queue_free()
-				mode = enums.MODE.NORMAL
-				mouseState = enums.MOUSE_STATE.NONE
+			for s in get_tree().get_nodes_in_group("Selectors"):
+				s.queue_free()
+			mode = enums.MODE.NORMAL
+			mouseState = enums.MOUSE_STATE.NONE
+
+
+
+
+func CheckRightButton(mouseEvent):
+	if (mouseEvent is InputEventMouseButton and Input.is_action_pressed("ui_menu") and mouseEvent.pressed):
+		print("pressed right mouse button")
+		
+		if (menu == null):
+			var radialMenu = load("res://UI/Build/BuildRadialMenu.tscn")
+			var rm = radialMenu.instance()
+			add_child(rm)
+			rm.set_position(get_global_mouse_position())
+			rm.CreateBuildingSelection(player.GetBuildingsUnlocked())
+			menu = rm
+		else:
+			remove_child(menu)
+			menu = null
+
+
+
+# How to create a build placement:
+
+#		if (menu == null):
+#			var menuResource = load("res://UI/Build/BuildPlacement.tscn")
+#			var m = menuResource.instance()
+#			m.CreatePlacement(enums.BUILDING_TYPE.INN)
+#			menu = m
+#			add_child(m)
+#		else:
+#			remove_child(menu)
+#			menu = null
+
+
+
+
+
+
+
 
 

@@ -54,12 +54,18 @@ func _ready():
 	
 	setSprites()
 	growTrees()
+	growStones()
 	
 	setBuildZoneTiles()
 	
 	setupComplete = true
 
 
+func GetTileAtPosition(xPos, yPos):
+	if (xPos < WIDE && yPos < TALL):
+		return tiles[yPos][xPos]
+	else:
+		return null
 
 
 
@@ -147,6 +153,9 @@ func SetTileType(row, column, symbol):
 	match symbol:
 		'T':
 			tile.setType(enums.TILETYPE.TREE)
+			
+		'S':
+			tile.setType(enums.TILETYPE.STONE)
 			
 		'W':
 			tile.setType(enums.TILETYPE.WATER)
@@ -273,7 +282,17 @@ func growTrees():
 			if (curTile.type == enums.TILETYPE.TREE):
 				var id = getSpriteId(r, c, curTile.type, true)
 				curTile.growTrees(id)
-				
+
+
+func growStones():
+	var rows = TALL
+	var cols = WIDE
+	for r in range(rows):
+		for c in range(cols):
+			var curTile = tiles[r][c]
+			if (curTile.type == enums.TILETYPE.STONE):
+				var id = getSpriteId(r, c, curTile.type, true)
+				curTile.growStones(id)
 				
 func setBuildZoneTiles():
 	var rows = TALL
