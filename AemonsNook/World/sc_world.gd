@@ -14,6 +14,22 @@ var curLevel
 
 var menu
 
+var buildings = []
+
+
+func SetMode(m):
+	mode = m
+
+func Normalize():
+	mouseState = enums.MOUSE_STATE.NONE
+	remove_child(menu)
+	menu = null
+
+
+func AddBuilding(building):
+	buildings.append(building)
+
+
 func _init():
 		# update this process both here and in n2_tiles
 	var levelString = "Level04"

@@ -19,10 +19,26 @@ func _ready():
 
 func _process(delta):
 	MoveWithMouse()
-	CheckValiditySquares()
+	SetValiditySquares()
+
+
+
+func _input(event):
+	if (event is InputEventMouseButton) and event.pressed:
+		if (valid):
+			var buildingScene = load("res://World/Buildings/Building.tscn")
+			var cur = buildingScene.instance()
+			cur.BuildingInit(whichBuilding)
+			cur.set_position(self.get_position())
+			get_node("/root/n2_world").AddBuilding(cur)
+			get_node("/root/n2_world").add_child(cur)
+			get_node("/root/n2_world").Normalize()
+
+
 
 
 func CreatePlacement(buildingType):
+	whichBuilding = buildingType
 	match (buildingType):
 		enums.BUILDING_TYPE.ARCHERY:
 			width = 2
@@ -91,7 +107,7 @@ func MoveWithMouse():
 	self.set_position(Vector2(snapX, snapY))
 
 
-func CheckValiditySquares():
+func SetValiditySquares():
 	var globalPosX = int(get_global_position().x)
 	var globalPosY = int(get_global_position().y)
 	var snapX = globalPosX - (globalPosX % 32)
@@ -99,6 +115,8 @@ func CheckValiditySquares():
 	var tilePosX = snapX / 32
 	var tilePosY = snapY / 32
 	var tiles = get_node("/root/n2_world/n2_tiles")
+	
+	var allValid = true # true until proven false
 	
 	for h in range(height):
 		for w in range(width):
@@ -108,5 +126,7 @@ func CheckValiditySquares():
 					squares[h][w].SetValid(true)
 				else:
 					squares[h][w].SetValid(false)
+					allValid = false
+	valid = allValid
 
 
