@@ -4,35 +4,35 @@
 [ext_resource path="res://Resources/Textures/Debug/TileGreen.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Textures/Debug/TileRed.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Textures/Debug/TileOrange.png" type="Texture" id=4]
-[ext_resource path="res://Resources/Textures/Terrain/Grass/Grass-one.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Horizontal.png" type="Texture" id=6]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Vertical.png" type="Texture" id=7]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-CornerTopLeft.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Corner-BottomLeft.png" type="Texture" id=9]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Left.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-CornerTopRight.png" type="Texture" id=11]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Top.png" type="Texture" id=12]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Corner-BottomRight.png" type="Texture" id=13]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Bottom.png" type="Texture" id=14]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Right.png" type="Texture" id=15]
-[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Intersection.png" type="Texture" id=16]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Horizontal.png" type="Texture" id=17]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Vertical.png" type="Texture" id=18]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-TopLeft.png" type="Texture" id=19]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-BottomLeft.png" type="Texture" id=20]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Left.png" type="Texture" id=21]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-TopRight.png" type="Texture" id=22]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Top.png" type="Texture" id=23]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-BottomRight.png" type="Texture" id=24]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Bottom.png" type="Texture" id=25]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Right.png" type="Texture" id=26]
-[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Intersection.png" type="Texture" id=27]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree1.png" type="Texture" id=28]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree2.png" type="Texture" id=29]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree3.png" type="Texture" id=30]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree4.png" type="Texture" id=31]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree5.png" type="Texture" id=32]
-[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree6.png" type="Texture" id=33]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Horizontal.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Vertical.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-TopLeft.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-BottomLeft.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Left.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-TopRight.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Top.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Corner-BottomRight.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Bottom.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-TS-Right.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Textures/Terrain/Water/Water-Intersection.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Horizontal.png" type="Texture" id=16]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Vertical.png" type="Texture" id=17]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-CornerTopLeft.png" type="Texture" id=18]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Corner-BottomLeft.png" type="Texture" id=19]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Left.png" type="Texture" id=20]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-CornerTopRight.png" type="Texture" id=21]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Top.png" type="Texture" id=22]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Corner-BottomRight.png" type="Texture" id=23]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Bottom.png" type="Texture" id=24]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-TS-Right.png" type="Texture" id=25]
+[ext_resource path="res://Resources/Textures/Terrain/Dirt/Dirt-Intersection.png" type="Texture" id=26]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree1.png" type="Texture" id=27]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree2.png" type="Texture" id=28]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree3.png" type="Texture" id=29]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree4.png" type="Texture" id=30]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree5.png" type="Texture" id=31]
+[ext_resource path="res://Resources/Textures/Terrain/Trees/Tree6.png" type="Texture" id=32]
+[ext_resource path="res://Resources/Textures/Terrain/Grass/Grass-one.png" type="Texture" id=33]
 [ext_resource path="res://World/topLayer.gd" type="Script" id=34]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -42,19 +42,14 @@ animations = [ {
 "name": "hover",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "grass",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "dirt",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "water",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 20 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"loop": false,
+"name": "dirt",
 "speed": 5.0
 }, {
 "frames": [  ],
@@ -62,9 +57,14 @@ animations = [ {
 "name": "none",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ) ],
+"frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ) ],
 "loop": true,
 "name": "tree",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 33 ) ],
+"loop": true,
+"name": "grass",
 "speed": 5.0
 } ]
 
@@ -83,6 +83,7 @@ __meta__ = {
 z_index = -1
 frames = SubResource( 1 )
 animation = "tree"
+offset = Vector2( 16, 16 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -91,6 +92,7 @@ __meta__ = {
 z_index = -1
 frames = SubResource( 1 )
 animation = "tree"
+offset = Vector2( 16, 16 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -99,12 +101,14 @@ __meta__ = {
 z_index = -1
 frames = SubResource( 1 )
 animation = "tree"
+offset = Vector2( 16, 16 )
 script = ExtResource( 34 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 1.5, 1.5 )

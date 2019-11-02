@@ -1,8 +1,7 @@
 tool
 extends Node2D
 
-var lastPos = Vector2()
-var curPos = Vector2()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,11 +10,15 @@ func _ready():
 
 func _process(delta):
 	
-	# new updated position:
-	curPos = get_viewport().get_mouse_position()
-	set_global_position(curPos)
+	var posX = get_global_mouse_position().x
+	var posY = get_global_mouse_position().y - 32
 	
-	#var dist = curPos.distance_to(lastPos)
+	self.set_position(Vector2(posX, posY))
 	
-	# last step
-	lastPos = curPos
+	
+	var mousePos = get_global_mouse_position()
+	var snapX = (int(mousePos.x) - (int(mousePos.x) % 32))/32
+	var snapY = (int(mousePos.y) - (int(mousePos.y) % 32))/32
+	get_node("Debug").set_text(str(snapX) + ", " + str(snapY))
+	get_node("Debug2").set_text(str(round(mousePos.x)) + ", " + str(round(mousePos.y)))
+	

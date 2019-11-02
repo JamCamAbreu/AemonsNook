@@ -21,9 +21,14 @@ func AddTileUnder(tile):
 
 
 func BuildingInit(buildingType):
+	SetBuildingSize(buildingType)
+	get_node("BottomLayer").set_offset(Vector2((width-1)*16, (height-1)*16))
+
+
+func SetBuildingSize(buildingType):
 	match buildingType:
 		enums.BUILDING_TYPE.ARCHERY:
-			get_node("BottomLayer").set_frame(4)
+			get_node("BottomLayer").set_frame(7)
 			width = 2
 			height = 2
 		enums.BUILDING_TYPE.BLACKSMITH:
@@ -43,7 +48,7 @@ func BuildingInit(buildingType):
 			width = 1
 			height = 1
 		enums.BUILDING_TYPE.BOOTH_GEMS:
-			get_node("BottomLayer").set_frame(4)
+			get_node("BottomLayer").set_frame(0)
 			width = 1
 			height = 1
 		enums.BUILDING_TYPE.BUTCHER:
@@ -75,10 +80,13 @@ func BuildingInit(buildingType):
 			width = 1
 			height = 1
 		enums.BUILDING_TYPE.BATH:
-			get_node("BottomLayer").set_frame(1)
+			get_node("BottomLayer").set_frame(7)
 			width = 2
 			height = 2
 		enums.BUILDING_TYPE.CLOTH:
-			get_node("BottomLayer").set_frame(2)
+			get_node("BottomLayer").set_frame(5)
 			width = 1
 			height = 2
+
+
+

@@ -1,23 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://UI/scripts/n2_mouse.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Textures/spr_gloveLeft.png" type="Texture" id=2]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "normal",
-"speed": 5.0
-} ]
 
 [node name="n2_mouse" type="Node2D"]
-position = Vector2( 286.488, 549.308 )
-rotation = 0.523599
+position = Vector2( -253.364, -246.201 )
 script = ExtResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 16, 0 )
-scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
-animation = "normal"
+[node name="Debug" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "-6, -5"
+
+[node name="Debug2" type="Label" parent="."]
+margin_top = -32.0
+margin_right = 173.0
+margin_bottom = -18.0
+text = "-237, -198"

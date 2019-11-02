@@ -45,6 +45,10 @@ func _init():
 	var buildingsUnlocked = curLevel.buildingsStart
 	for b in buildingsUnlocked:
 		player.AddBuilding(b)
+		
+	var mouseScene = load("res://UI/sc_mouse.tscn")
+	var mouse = mouseScene.instance()
+	self.add_child(mouse)
 
 
 # Eventually, I should get peep generator info while loading up the level.

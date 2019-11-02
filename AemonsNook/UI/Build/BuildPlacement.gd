@@ -24,17 +24,20 @@ func _process(delta):
 
 
 func _input(event):
-	if (event is InputEventMouseButton) and event.pressed:
-		if (valid):
-			var buildingScene = load("res://World/Buildings/Building.tscn")
-			var cur = buildingScene.instance()
-			cur.BuildingInit(whichBuilding)
-			cur.set_position(self.get_position())
-			get_node("/root/n2_world").AddBuilding(cur)
-			get_node("/root/n2_world").add_child(cur)
-			get_node("/root/n2_world").Normalize()
+	if (event is InputEventMouseButton)and Input.is_action_pressed("ui_select") and (event.pressed):
+		Place(event)
 
 
+
+func Place(event):
+	if (valid):
+		var buildingScene = load("res://World/Buildings/Building.tscn")
+		var cur = buildingScene.instance()
+		cur.BuildingInit(whichBuilding)
+		cur.set_position(self.get_position())
+		get_node("/root/n2_world").AddBuilding(cur)
+		get_node("/root/n2_world").add_child(cur)
+		get_node("/root/n2_world").Normalize()
 
 
 func CreatePlacement(buildingType):
@@ -101,23 +104,16 @@ func CreateSquares(setWidth, setHeight):
 
 
 func MoveWithMouse():
-	var mousePos = get_global_mouse_position()
-	var snapX = int(mousePos.x) - (int(mousePos.x) % 32)
-	var snapY = int(mousePos.y) - (int(mousePos.y) % 32)
-	self.set_position(Vector2(snapX, snapY))
+	self.set_position(GetTilePos())
 
 
 func SetValiditySquares():
-	var globalPosX = int(get_global_position().x)
-	var globalPosY = int(get_global_position().y)
-	var snapX = globalPosX - (globalPosX % 32)
-	var snapY = globalPosY - (globalPosY % 32)
-	var tilePosX = snapX / 32
-	var tilePosY = snapY / 32
+	
+	var mouse = GetTilePos()
+	var tilePosX = mouse.x / 32
+	var tilePosY = mouse.y / 32
 	var tiles = get_node("/root/n2_world/n2_tiles")
-	
 	var allValid = true # true until proven false
-	
 	for h in range(height):
 		for w in range(width):
 			var tile = tiles.GetTileAtPosition(tilePosX + w, tilePosY + h)
@@ -129,4 +125,10 @@ func SetValiditySquares():
 					allValid = false
 	valid = allValid
 
+
+func GetTilePos():
+	var mousePos = get_global_mouse_position()
+	var snapX = int(mousePos.x) - (int(mousePos.x) % 32) + 16
+	var snapY = int(mousePos.y) - (int(mousePos.y) % 32) + 16
+	return Vector2(snapX, snapY)
 
