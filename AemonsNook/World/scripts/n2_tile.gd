@@ -112,7 +112,12 @@ func _setTexture(type):
 			get_node("middleLayer").set_animation("grass")
 			get_node("topLayer").set_animation("none")
 			topAnimation = "none"
-			
+		enums.TILETYPE.BUILDING:
+			get_node("bottomLayer").set_animation("grass")
+			get_node("middleLayer").set_animation("dirt")
+			get_node("topLayer").set_animation("none")
+			topAnimation = "none"
+
 
 func setType(_type):
 	type = _type
@@ -141,7 +146,7 @@ func setSprite(spriteId):
 	#var label = get_node("debugLabel")
 	#label.set_text(str(spriteId))
 	
-	if (type == enums.TILETYPE.DIRT):
+	if (type == enums.TILETYPE.DIRT || type == enums.TILETYPE.BUILDING):
 		get_node("middleLayer").set_frame(spriteId)
 		get_node("bottomLayer").set_frame(spriteId)
 		

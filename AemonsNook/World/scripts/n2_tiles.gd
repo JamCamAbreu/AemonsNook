@@ -271,7 +271,17 @@ func setSprites():
 		for c in range(cols):
 			var curTile = tiles[r][c]
 			var id = getSpriteId(r, c, curTile.type, true)
+			
+			# Dirt types check for building:
+			if (curTile.type == enums.TILETYPE.DIRT):
+				id = id | getSpriteId(r, c, enums.TILETYPE.BUILDING, true)
+			
+			# Building types check for dirt:
+			if (curTile.type == enums.TILETYPE.BUILDING):
+				id = id | getSpriteId(r, c, enums.TILETYPE.DIRT, true)
+			
 			curTile.setSprite(id)
+
 
 func growTrees():
 	var rows = TALL

@@ -36,4 +36,5 @@ func CreateBuildingSelection(availableTypes):
 			add_child(cur)
 			
 	emit_signal("buildModeStarted")
+	
 

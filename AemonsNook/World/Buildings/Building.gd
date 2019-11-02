@@ -5,6 +5,9 @@ const enums = preload("res://Global/globalEnums.gd")
 var width
 var height
 
+var originX
+var originY
+
 var tilesUnder = []
 
 # OTHER VARS HERE:
@@ -16,13 +19,56 @@ var tilesUnder = []
 func _ready():
 	pass 
 
-func AddTileUnder(tile):
-	tilesUnder.append(tile)
 
-
-func BuildingInit(buildingType):
+func BuildingInit(buildingType, posX, posY):
 	SetBuildingSize(buildingType)
+	OffsetSprites()
+	SetPosition(posX, posY)
+	SetTiles()
+
+
+
+func OffsetSprites():
 	get_node("BottomLayer").set_offset(Vector2((width-1)*16, (height-1)*16))
+
+
+
+func SetTiles():
+	var tiles = get_node("/root/n2_world/n2_tiles")
+	var originTile = tiles.GetTileAtPosition(originX, originY)
+	GetAllTileNodes(originTile)
+	SetTilesBuildingType()
+
+
+func SetPosition(posX, posY):
+	originX = posX
+	originY = posY
+
+
+func SetTilesBuildingType():
+	for t in tilesUnder:
+		t.setType(enums.TILETYPE.BUILDING)
+	
+	# refresh map tile codes:
+	get_node("/root/n2_world/n2_tiles").setSprites()
+
+
+
+func GetAllTileNodes(originTile):
+	if (originTile != null):
+		
+		var leftEdgeTile = originTile
+		for h in range(height):
+			
+			var tileRight = leftEdgeTile
+			for w in range(width):
+				tilesUnder.append(tileRight)
+				tileRight = tileRight.tileRight
+
+			# Next Row
+			leftEdgeTile = leftEdgeTile.tileBelow
+
+
 
 
 func SetBuildingSize(buildingType):

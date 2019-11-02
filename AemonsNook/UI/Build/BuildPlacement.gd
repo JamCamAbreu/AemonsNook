@@ -33,11 +33,16 @@ func Place(event):
 	if (valid):
 		var buildingScene = load("res://World/Buildings/Building.tscn")
 		var cur = buildingScene.instance()
-		cur.BuildingInit(whichBuilding)
+		
+		var tileX = self.get_position().x / 32
+		var tileY = self.get_position().y / 32
+		get_node("/root/n2_world").add_child(cur)
+		cur.BuildingInit(whichBuilding, tileX, tileY)
 		cur.set_position(self.get_position())
 		get_node("/root/n2_world").AddBuilding(cur)
-		get_node("/root/n2_world").add_child(cur)
 		get_node("/root/n2_world").Normalize()
+		
+		self.queue_free()
 
 
 func CreatePlacement(buildingType):
@@ -131,4 +136,6 @@ func GetTilePos():
 	var snapX = int(mousePos.x) - (int(mousePos.x) % 32) + 16
 	var snapY = int(mousePos.y) - (int(mousePos.y) % 32) + 16
 	return Vector2(snapX, snapY)
+
+
 

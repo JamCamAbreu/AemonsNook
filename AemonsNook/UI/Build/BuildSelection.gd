@@ -51,6 +51,8 @@ func BeginPlacement(type):
 	m.CreatePlacement(type)
 	worldNode.menu = m
 	worldNode.add_child(m)
+	
+	self.queue_free()
 
 
 
