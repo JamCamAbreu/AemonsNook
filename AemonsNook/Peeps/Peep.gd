@@ -126,7 +126,9 @@ func Walk():
 		else:
 			return true # true means we are finished with task
 
-	var moveToPos = nextTile.getPos()
+	var centerTile = Vector2(16, 16)
+	var moveToPos = nextTile.getPos() + centerTile
+	moveToPos = moveToPos + AdjustForLane(curTile, nextTile)
 	if (position.distance_to(moveToPos) <= CLOSING_GAP):
 		position = moveToPos
 		curTile.DebugClearPathImage()
@@ -140,6 +142,19 @@ func Walk():
 		#get_node("/root/n2_world/playerView").set_position(position)
 		return false # false means keep walking
 
+
+func AdjustForLane(curTile, nextTile):
+	var pixels = 8
+	if (curTile == null || nextTile == null):
+		return Vector2(0,0)
+	if (nextTile == curTile.tileRight):
+		return Vector2(0,pixels)
+	elif (nextTile == curTile.tileAbove):
+		return Vector2(pixels, 0)
+	elif (nextTile == curTile.tileLeft):
+		return Vector2(0, -pixels)
+	elif (nextTile == curTile.tileBelow):
+		return Vector2(-pixels, 0)
 
 func NewWalkTask(tile):
 	var args = []

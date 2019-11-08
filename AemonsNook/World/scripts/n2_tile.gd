@@ -360,6 +360,9 @@ func harvestClickable(obj):
 
 func createWaterSparkle():
 	var t = effect.instance()
+	var randomX = randi() % 17
+	var randomY = randi() % 17
+	t.set_position(Vector2(8 + randomX, 8 + randomY))
 	add_child(t)
 
 

@@ -105,8 +105,13 @@ func SetBuildingType(type):
 
 
 func _on_Area2D_mouse_entered():
-	get_node("/root/n2_world").mouseState = enums.MOUSE_STATE.INSIDE
+	get_node("/root/n2_world")
+	var worldNode = get_node("/root/n2_world")
+	if (worldNode != null):
+		worldNode.mouseState = enums.MOUSE_STATE.INSIDE
 
 
 func _on_Area2D_mouse_exited():
-	get_node("/root/n2_world").mouseState = enums.MOUSE_STATE.OUTSIDE
+	var worldNode = get_node("/root/n2_world")
+	if (worldNode != null):
+		worldNode.mouseState = enums.MOUSE_STATE.OUTSIDE
